@@ -20,7 +20,9 @@ export const fetchWeeklyFilms =async (api=apiKey,page=1) => {
             title: filter.title || filter.name,
             rating: filter.vote_average,
             genreId: filter.genre_ids,
-            year: filter.release_date || filter.first_air_date
+            year: filter.release_date || filter.first_air_date,
+            id: filter.id,
+            image: filter.poster_path
         }));
         return filteredData;
     }
@@ -49,7 +51,9 @@ export const fetchSearchFilms = async (input, year=null, api=apiKey, page=1) =>{
             title: filter.title || filter.name,
             rating: filter.vote_average,
             genreId: filter.genre_ids,
-            year: filter.release_date || filter.first_air_date
+            year: filter.release_date || filter.first_air_date,
+            id: filter.id,
+            image: filter.poster_path
         }));
         return filteredFilms;
     }
