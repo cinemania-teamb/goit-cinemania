@@ -1,6 +1,8 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
+
 const modalUi = movie => {
+  console.log(movie);
   const instance = basicLightbox.create(`
             <form id="movie-form">
             <p class="close">&#10006;</p>
@@ -13,7 +15,7 @@ const modalUi = movie => {
                     <thead>
                         <tr>
                             <th>Vote/Votes</th>
-                            <td>${movie.vote_average}/${movie.vote_count}</td>
+                            <td><span class="vote">${movie.vote_average}</span> / <span class="vote">${movie.vote_count}</span></td>
                         </tr>
                         
                     </thead>

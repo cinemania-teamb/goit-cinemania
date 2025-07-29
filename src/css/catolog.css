@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+#catolog-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+#catolog-form button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 14px;
+    background-color: #F87719;
+    border: none;
+}
+
+#catolog-form button:hover {
+    cursor: pointer;
+}
+
+#catolog-form button:hover svg.icon {
+    fill: black;
+}
+
+.input-form {
+    padding: 12px 26px 12px 24px;
+    border-radius: 8px;
+    border: 1px solid #4D4D4D;
+    width: 100%;
+}
+
+#choose {
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #4D4D4D;
+}
+
+#choose option {
+    color: white;
+    background-color: black;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    list-style: none;
+}
+
+.list li p {
+    color: white;
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.list li h3 {
+    color: white;
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.list li {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.list li .info {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.not-found {
+    color: black;
+    font-size: 32px;
+    line-height: 2.2rem;
+
+}
+@media screen and (min-width: 768px) {
+    .container{
+        max-width: 768px;
+    }
+    .input-form{
+        width: 50%;
+    }
+}
+@media  screen and (min-width: 1280px) {
+    
+    .container{
+        max-width: 1280px;
+    }
+}
