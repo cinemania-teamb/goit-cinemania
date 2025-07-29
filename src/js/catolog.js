@@ -29,6 +29,7 @@ export const fetchWeeklyFilms =async (api=apiKey,page=1) => {
     }
 }
 
+//filtered by name and year or both
 export const fetchSearchFilms = async (input, year=null, api=apiKey, page=1) =>{
 
     const filteredUrl = year !== null ? `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=en-US&page=${page}&primary_release_year=${year}` :
@@ -58,5 +59,3 @@ export const fetchSearchFilms = async (input, year=null, api=apiKey, page=1) =>{
         
 }
 
-const res = await fetchSearchFilms("Hot Potato","1979")
-console.log(res);
