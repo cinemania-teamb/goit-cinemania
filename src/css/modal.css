@@ -5,10 +5,12 @@
 }
 #movie-form {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     color: white;
     gap: 20px;
-    width: 846px;
+    width: 100%;
+    
     height: 598px;
     background-color: rgb(17, 17, 17);
     padding: 35px;
@@ -34,7 +36,7 @@
 
 #movie-form table th,
 td {
-    padding: 10px 0px;
+    padding: 10px 30px;
 }
 
 #movie-form h3 {
@@ -69,4 +71,23 @@ td {
 #movie-form button:hover {
     background-color: white;
     color: #F87719;
+}
+#movie-form .vote {
+    padding: 1px 8px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+}
+@media screen and (min-width: 768px) {
+    #movie-form {
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+    
+}
+@media screen and (min-width:1280px) {
+    #movie-form {
+        width: 846px;
+    }
 }
