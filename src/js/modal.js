@@ -1,3 +1,5 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 const modalUi = movie => {
   const instance = basicLightbox.create(`
             <form id="movie-form">
