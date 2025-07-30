@@ -16,7 +16,6 @@ export const fetchWeeklyFilms = async (page = 1) => {
     
     try{
         const res = await axios.get(url);
-        console.log(res.data);
         const filteredData = res.data.results.map( filter=> ({
             title: filter.title || filter.name,
             rating: filter.vote_average,
@@ -36,14 +35,14 @@ export const fetchWeeklyFilms = async (page = 1) => {
 }
 
 //filtered by name and year or both
-export const fetchSearchFilms = async (input, year = null,page = 1) => {
+export const fetchSearchFilms = async (input, year = null,page) => {
 
     const filteredUrl = year !== null ? `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${input}&include_adult=false&language=en-US&page=${page}&primary_release_year=${year}` :
     `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${input}&include_adult=false&language=en-US&page=${page}`
     
 
     try{
-        const res = await axios.get(filteredUrl);
+      const res = await axios.get(filteredUrl);
         const filteredFilms = res.data.results.map(filter => ({
             title: filter.title || filter.name,
             rating: filter.vote_average,
@@ -53,8 +52,8 @@ export const fetchSearchFilms = async (input, year = null,page = 1) => {
             image: filter.poster_path
         }));
         return {
-            filteredFilms,
-            total_pages: res.data.total_pages
+          filteredFilms,
+          total_pages: res.data.total_pages,
         };
     }
     catch(err){
@@ -69,7 +68,7 @@ export const  renderFilms =(images)=> {
     .map(({ id, title, image, year }) => {
       const date = year.split('-')[0];
       return image
-        ? `<li id="${id}" style="background-image: url(https://image.tmdb.org/t/p/w500/${image});background-size: cover;
+        && `<li id="${id}" style="background-image: url(https://image.tmdb.org/t/p/w500/${image});background-size: cover;
       background-position: center;
       width: 395px;
       height: 574px;">
@@ -77,7 +76,7 @@ export const  renderFilms =(images)=> {
               <p>${title.toUpperCase()} | ${date}</p>
           </div>
       </li>`
-        : '';
+        ;
     })
     .join('');
   list.insertAdjacentHTML('beforeend', newImages);
@@ -126,6 +125,7 @@ export const loadSearchFilms = async (input, year, page = 1)=> {
       year,
       page
     );
+    
     totalPages = total_pages;
     currentPage = page;
     if (filteredFilms.length === 0) {
@@ -136,6 +136,7 @@ export const loadSearchFilms = async (input, year, page = 1)=> {
     renderFilms(filteredFilms);
     renderPagination(totalPages, currentPage);
     lastSearch = { input, year, isSearch: true };
+    return lastSearch;
   } catch (error) {
     console.log(error);
   }

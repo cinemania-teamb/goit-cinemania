@@ -22,7 +22,16 @@ form.addEventListener('submit', async e => {
   e.preventDefault();
   const input = e.target.elements.input.value;
   const year = e.target.elements.choose.value;
-  await loadSearchFilms(input, year, 1);
+  if (input === "") {
+    list.innerHTML = `<li class="not-found">Please enter a search term.</li>`;
+    pagination.innerHTML = '';
+    lastSearch = { input: '', year: '', isSearch: false };
+    return;
+  }
+  const newLastSearch = await loadSearchFilms(input, year, 1);
+  lastSearch.isSearch = newLastSearch.isSearch;
+  lastSearch.input = newLastSearch.input;
+  lastSearch.year = newLastSearch.year;
   form.reset();
 });
 
@@ -30,6 +39,7 @@ pagination.addEventListener('click', async e => {
   if (e.target.tagName === 'LI' && e.target.dataset.page) {
     const page = Number(e.target.dataset.page);
     if (lastSearch.isSearch) {
+      
       await loadSearchFilms(lastSearch.input, lastSearch.year, page);
     } else {
       await loadWeeklyFilms(page);
