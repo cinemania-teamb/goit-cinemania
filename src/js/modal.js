@@ -2,7 +2,6 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 const modalUi = movie => {
-  console.log(movie);
   const instance = basicLightbox.create(`
             <form id="movie-form">
             <p class="close">&#10006;</p>
