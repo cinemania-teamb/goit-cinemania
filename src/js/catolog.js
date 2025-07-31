@@ -8,6 +8,16 @@ const list = document.querySelector('.list');
 const pagination = document.querySelector('.pagination ul');
 let lastSearch = { input: '', year: '', isSearch: false };
 
+const startEmpty = `<svg class="icon" width="18" height="18">
+          <use href="./icons.svg#icon-star-outline"></use>
+        </svg>`;
+const startHalf = `<svg class="icon" fill="#F87719" width="18" height="18">
+          <use href="./icons.svg#icon-star-half"></use>
+        </svg>`;
+const startFull = `<svg class="icon" fill="#F87719" width="18" height="18">
+          <use href="./icons.svg#icon-star"></use>
+        </svg>`;
+
 let currentPage = 1;
 let totalPages = 1;
 
@@ -15,10 +25,10 @@ export const fetchWeeklyFilms = async (page = 1) => {
     const url=`https://api.themoviedb.org/3/trending/movie/week?api_key=${api_key}&language=en-US&page=${page}`;
     
     try{
-        const res = await axios.get(url);
+      const res = await axios.get(url);
         const filteredData = res.data.results.map( filter=> ({
             title: filter.title || filter.name,
-            rating: filter.vote_average,
+            rating: Math.round(filter.vote_average),
             genreId: filter.genre_ids,
             year: filter.release_date || filter.first_air_date,
             id: filter.id,
@@ -45,7 +55,7 @@ export const fetchSearchFilms = async (input, year = null,page) => {
       const res = await axios.get(filteredUrl);
         const filteredFilms = res.data.results.map(filter => ({
             title: filter.title || filter.name,
-            rating: filter.vote_average,
+            rating: Math.round(filter.vote_average),
             genreId: filter.genre_ids,
             year: filter.release_date || filter.first_air_date,
             id: filter.id,
@@ -65,8 +75,9 @@ export const fetchSearchFilms = async (input, year = null,page) => {
 export const  renderFilms =(images)=> {
   list.innerHTML = '';
   const newImages = images
-    .map(({ id, title, image, year }) => {
+    .map(({ id, title, image, year, rating }) => {
       const date = year.split('-')[0];
+      const newRating = renderRating(rating);
       return image
         && `<li id="${id}" style="background-image: url(https://image.tmdb.org/t/p/w500/${image});background-size: cover;
       background-position: center;
@@ -74,6 +85,7 @@ export const  renderFilms =(images)=> {
       height: 574px;">
           <div class="info">
               <p>${title.toUpperCase()} | ${date}</p>
+              ${newRating}
           </div>
       </li>`
         ;
@@ -140,4 +152,45 @@ export const loadSearchFilms = async (input, year, page = 1)=> {
   } catch (error) {
     console.log(error);
   }
+}
+export const renderRating = (rating) => { 
+  let starts = '';
+   switch (rating) {
+     case 0:
+       starts = `${startEmpty.repeat(5)}`;
+       break;
+     case 1:
+       starts = `${startHalf}${startEmpty.repeat(4)}`;
+       break;
+     case 2:
+       starts = `${startFull}${startEmpty.repeat(4)}`;
+       break;
+     case 3:
+       starts = `${startFull}${startHalf}${startEmpty.repeat(3)}`;
+       break;
+     case 4:
+       starts = `${startFull.repeat(2)}${startEmpty.repeat(3)}`;
+       break;
+     case 5:
+       starts = `${startFull.repeat(2)}${startHalf}${startEmpty.repeat(2)}`;
+       break;
+     case 6:
+       starts = `${startFull.repeat(3)}${startEmpty.repeat(2)}`;
+       break;
+     case 7:
+       starts = `${startFull.repeat(3)}${startHalf}${startEmpty}`;
+       break;
+     case 8:
+       starts = `${startFull.repeat(4)}${startEmpty}`;
+       break;
+     case 9:
+       starts = `${startFull.repeat(4)}${startHalf}`;
+       break;
+     case 10:
+       starts = `${startFull.repeat(5)}`;
+       break;
+     default:
+       throw new Error('Invalid rating');
+  }
+  return `<div>${starts}</div>`;
 }
