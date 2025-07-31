@@ -15,6 +15,16 @@ menuToggle.addEventListener('click', () => {
     mobileOverlay.classList.toggle('active');
 });
 
+
+// Tema geçişi: light <-> dark
+const themeSwitcher = document.getElementById('theme-switcher');
+const body = document.body;
+
+themeSwitcher.addEventListener('click', () => {
+  body.classList.toggle('dark-theme');
+});
+
+
 // Menü dışına tıklanınca kapat (isteğe bağlı)
 document.addEventListener('click', (e) => {
     const isClickInsideMenu = mobileMenu.contains(e.target);

@@ -106,11 +106,9 @@ body {
 .header-theme-switcher {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 22px;
-    cursor: pointer;
+    justify-content: space-between;
     width: 60px;
-    height: 24px;
+    height: 28px;
     background: linear-gradient(to left,
             var(--focus-color),
             var(--gradient-color));
@@ -122,11 +120,14 @@ body {
 
 #icon-moon,
 #icon-sun {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
 }
 
 .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 18px;
     height: 18px;
     z-index: 2;
@@ -260,4 +261,43 @@ body {
         width: 16px;
         height: 16px;
     }
+}
+
+/* Tema: Light (varsayılan) - koyu temayı devre dışı bırak */
+body.dark-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark-theme .header {
+    background-color: #ffffff;
+}
+
+body.dark-theme .nav-link {
+    color: #000000;
+}
+
+body.dark-theme .nav-link.active {
+    color: var(--focus-color);
+}
+
+body.dark-theme .logo-text {
+    color: #000000;
+}
+
+body.dark-theme .menu-toggle {
+    color: #000000;
+}
+
+body.dark-theme .mobile-menu {
+    background-color: #ffffff;
+}
+
+body.dark-theme .mobile-menu .nav-item a {
+    color: #000000;
+}
+
+body.dark-theme .mobile-menu .nav-item a:hover,
+body.dark-theme .mobile-menu .nav-item a:focus {
+    color: var(--focus-color);
 }
