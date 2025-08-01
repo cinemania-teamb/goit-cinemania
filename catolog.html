@@ -12,15 +12,73 @@
     />
     <title>Cinemania</title>
     <script type="module" crossorigin src="/goit-cinemania/assets/vendor-wG9nbpZs.js"></script>
-    <script type="module" crossorigin src="/goit-cinemania/assets/main-DhlnCDI5.js"></script>
+    <script type="module" crossorigin src="/goit-cinemania/assets/main-DXPYS4dg.js"></script>
     <link rel="stylesheet" crossorigin href="/goit-cinemania/assets/vendor-C3QZVnZz.css">
     <link rel="stylesheet" crossorigin href="/goit-cinemania/assets/catolog-C1q020tY.css">
   </head>
   <body>
-    <header>
-  
+    <header class="header">
+    <div class="container">
+        <div class="logo-container">
+            <a href="./index.html">
+                <div class="logo">
+                    <img src="/goit-cinemania/assets/header-logo-BBQNfyqe.png" alt="logo" class="logo-img" width="48" height="48" />
+                    <span class="logo-text">Cinemania</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Hamburger button (mobile only) -->
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <svg width="24" height="24">
+                <use href="/goit-cinemania/assets/sprite-OSxcUjuV.svg#icon-menu"></use>
+            </svg>
+        </button>
+
+        <div class="nav-container">
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./catalog.html">CATALOG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./library.html">MY LIBRARY</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-theme-container">
+            <div class="header-theme-switcher" id="theme-switcher">
+                <div class="icon">
+                    <svg id="icon-moon">
+                        <use href="/goit-cinemania/assets/sprite-OSxcUjuV.svg#icon-moon"></use>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg id="icon-sun">
+                        <use href="/goit-cinemania/assets/sprite-OSxcUjuV.svg#icon-sun"></use>
+                    </svg>
+                </div>
+                <div class="toggle-circle"></div>
+            </div>
+        </div>
+    </div>
 </header>
 
+<!-- Mobile Sidebar Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <ul class="nav-list">
+        <li class="nav-item"><a href="./index.html">Home</a></li>
+        <li class="nav-item"><a href="./catalog.html">Catalog</a></li>
+        <li class="nav-item"><a href="./library.html">My Library</a></li>
+    </ul>
+</div>
+
+<!-- Overlay -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
 
     <main>
       <section class="catolog">
