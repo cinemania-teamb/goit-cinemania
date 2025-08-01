@@ -58,8 +58,9 @@ list.addEventListener('click', async e => {
     } catch (error) {
       console.log(error);
     }
-  }
-});
+  }   
+});  
 
 // Initial load
 loadWeeklyFilms();
+// Weekly kısmı 
