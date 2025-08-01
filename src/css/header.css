@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 :root {
     --font-family-regular: 'Roboto Regular', sans-serif;
     --font-family-medium: 'Roboto Medium', sans-serif;
@@ -8,12 +13,9 @@
     --background: #000000;
 }
 
-body {
-    max-width: 1280px;
-    margin: 0 auto;
-}
 
-.container {
+
+.header-container{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -122,16 +124,6 @@ body {
 #icon-sun {
     width: 16px;
     height: 16px;
-}
-
-.icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    z-index: 2;
-    transition: opacity 0.3s ease;
 }
 
 .menu-toggle {
