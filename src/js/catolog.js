@@ -4,7 +4,7 @@ import axios from 'axios';
 const api_key = '4e64f2e0a197aa7c5d1170773553320c';
 
 
-/*const list = document.querySelector('.list');
+const list = document.querySelector('.list');
 const pagination = document.querySelector('.pagination ul');
 let lastSearch = { input: '', year: '', isSearch: false };
 
@@ -17,7 +17,7 @@ const startHalf = `<svg class="icon" fill="#F87719" width="18" height="18">
 const startFull = `<svg class="icon" fill="#F87719" width="18" height="18">
           <use href="./icons.svg#icon-star"></use>
         </svg>`;
-*/
+
 let currentPage = 1;
 let totalPages = 1;
 
@@ -91,7 +91,7 @@ export const fetchSearchFilms = async (input, year = null,page) => {
     }
         
 }
-/*
+
 export const  renderFilms =(images)=> {
   list.innerHTML = '';
   const newImages = images
@@ -214,6 +214,5 @@ export const renderRating = (rating) => {
   }
   return `<div>${starts}</div>`;
 }
-*/
-const a =await fetchWeeklyFilms();
-console.log(a)
+
+
