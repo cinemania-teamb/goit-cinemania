@@ -69,6 +69,7 @@ body{
     font-size: 20px;
     margin-top: 10px;
     font-weight: bold;
+    width: 50%;
 }
 
 .list li h3 {
@@ -85,9 +86,14 @@ body{
 }
 
 .list li .info {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    width: 50%;
+    padding: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    border-radius: 5px;
 }
 
 .not-found {

@@ -14,7 +14,7 @@ const modalUi = movie => {
                     <thead>
                         <tr>
                             <th>Vote/Votes</th>
-                            <td><span class="vote">${movie.vote_average}</span> / <span class="vote">${movie.vote_count}</span></td>
+                            <td><span class="vote">${Math.round(movie.vote_average)}</span> / <span class="vote">${movie.vote_count}</span></td>
                         </tr>
                         
                     </thead>
