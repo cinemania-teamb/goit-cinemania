@@ -1,3 +1,4 @@
+import './js/header.js';
 import axios from 'axios';
 import modalUi from './js/modal.js';
 import {
