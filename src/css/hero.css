@@ -70,18 +70,148 @@ button {
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 4px;
-  background-color: crimson;
+  background-color: #F87719;
   color: white;
   cursor: pointer;
   font-size: 1rem;
 }
 
 button:hover {
-  background-color: darkred;
+  background-color: #F8F8F8;
+  color: black;
 }
 
-/* Modal aynı kalabilir */
-.modal { /* ... */ }
-.modal-content { /* ... */ }
-.close-btn { /* ... */ }
+
 .hidden { display: none; }
+
+.modal.hidden {
+  display: none !important;
+}
+
+/* Modal aktif hale gelince görünür olacak */
+.custom-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7); /* arkayı flu yapar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* İçerik kutusu */
+.custom-modal .modal-content {
+  background-color: #1c1c1c;
+  color: white;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  position: relative;
+  padding: 2rem;
+}
+
+/* Kapatma butonu */
+.custom-modal .close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  z-index: 110;
+}
+
+.basicLightbox {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.3s ease;
+}
+
+/* Modal içeriğine gölge ve hafif parlaklık */
+.basicLightbox__placeholder > * {
+  box-shadow: 0 0 40px 10px rgba(255, 136, 25, 0.6);
+  border: 1px solid rgba(255, 136, 25, 0.8);
+  background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 15px;
+}
+
+/* Buton hover efektini biraz ışıltılı yap */
+.movie-submit:hover {
+  background-color: #ffa726 !important;
+  color: #222 !important;
+  box-shadow: 0 0 15px #ffa726;
+  transition: all 0.3s ease;
+}
+.custom-herocard {
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  box-shadow: 0 0 40px 10px rgba(255, 136, 25, 0.6);
+  border: 1px solid rgba(255, 136, 25, 0.8);
+}
+
+/* Modal içinde poster görseli */
+.custom-herocard img {
+  width: 250px;
+  border-radius: 10px;
+}
+
+/* Modal içeriği */
+.custom-herocard .modal-info {
+  margin-top: 1rem;
+}
+
+/* Arka plan blur ve flu */
+.basicLightbox {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Submit butonu hover efekti */
+.movie-submit:hover {
+  background-color: #ffa726 !important;
+  color: #222 !important;
+  box-shadow: 0 0 15px #ffa726;
+  transition: all 0.3s ease;
+}
+.basicLightbox th::after {
+  content: ":";
+  margin-left: 4px;
+  color: #FFA726; /* İsteğe göre renk */
+}
+.basicLightbox h3 {
+  font-size: 1.5rem;
+  color: #F87719;
+  position: relative;
+  margin-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Altına ince çizgi ekle */
+.basicLightbox h3::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 2px;
+  background-color: #F87719;
+  margin-top: 0.4rem;
+}

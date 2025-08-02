@@ -1,3 +1,7 @@
+import modalUi from './modal.js';
+import openHeroCard from './herocard.js';
+
+
 const API_KEY = '4e64f2e0a197aa7c5d1170773553320c';
 
 const carousel = document.getElementById('carousel');
@@ -27,6 +31,8 @@ async function loadTrendingMovies() {
       slide.className = 'hero-slide';
       slide.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${film.backdrop_path})`;
 
+
+
       slide.innerHTML = `
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -38,6 +44,8 @@ async function loadTrendingMovies() {
         </div>
       `;
 
+      
+
       carousel.appendChild(slide);
     });
 
@@ -46,6 +54,13 @@ async function loadTrendingMovies() {
     showDefaultSlide();
   }
 }
+
+
+
+
+
+
+
 
 function showDefaultSlide() {
   const slide = document.createElement('div');
@@ -71,15 +86,16 @@ nextBtn.addEventListener('click', () => {
   carousel.scrollBy({ left: window.innerWidth, behavior: 'smooth' });
 });
 
+
+
 // Modallar
 function openDetailsModal(film) {
-  detailsContainer.innerHTML = `
-    <h2>${film.title}</h2>
-    <p><strong>Rating:</strong> ${film.vote_average}</p>
-    <p>${film.overview}</p>
-  `;
-  detailsModal.classList.remove('hidden');
+  openHeroCard(film.id);
 }
+
+
+
+
 
 async function openTrailerModal(filmId) {
   try {
@@ -109,3 +125,7 @@ closeTrailer.onclick = () => trailerModal.classList.add('hidden');
 
 // Sayfa yüklenince başla
 document.addEventListener('DOMContentLoaded', loadTrendingMovies);
+
+window.openDetailsModal = openDetailsModal;
+window.openTrailerModal= openTrailerModal;
+
