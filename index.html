@@ -5,8 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cinemania</title>
-    <script type="module" crossorigin src="/goit-cinemania/assets/header-3fit8tjM.js"></script>
+    <script type="module" crossorigin src="/goit-cinemania/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-cinemania/assets/header-3fit8tjM.js">
     <link rel="stylesheet" crossorigin href="/goit-cinemania/assets/header-jehckQ2N.css">
+    <link rel="stylesheet" crossorigin href="/goit-cinemania/assets/index-BpJZwh9D.css">
   </head>
   <body>
     <header class="header">
@@ -71,6 +73,46 @@
 
 <!-- Overlay -->
 <div class="mobile-overlay" id="mobileOverlay"></div>
+    <!-- hero.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinemania - Hero Carousel</title>
+  <link rel="stylesheet" href="hero.css" />
+</head>
+<body>
+  <section id="hero-carousel">
+    <button id="prev-btn" class="nav-btn">❮</button>
+
+    <div class="carousel-container" id="carousel">
+      <!-- JS ile kartlar burada oluşturulacak -->
+    </div>
+
+    <button id="next-btn" class="nav-btn">❯</button>
+  </section>
+
+  <!-- Modal: Detay -->
+  <div id="details-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-details">&times;</span>
+      <div id="details-container"></div>
+    </div>
+  </div>
+
+  <!-- Modal: Fragman -->
+  <div id="trailer-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-trailer">&times;</span>
+      <div id="trailer-container"></div>
+    </div>
+  </div>
+
+  <script src="hero.js"></script>
+</body>
+</html>
+
 
     <main>
       <!-- Loads the specified .html file -->
