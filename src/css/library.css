@@ -1,0 +1,113 @@
+/* Temel ayarlar */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+
+/* Üst bölüm: Arka plan + başlık */
+.library-div {
+  background: url('./assets/cinema.png') no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  max-width: 1280px;
+  height: 720px;
+  margin: 0 auto;
+  padding: 120px 50px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.library-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.library-description {
+  font-size: 16px;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* Kütüphane bölüm */
+.library {
+  background-color: #0a0a0a;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+/* Tür seçimi */
+.library__filter {
+  margin-bottom: 30px;
+}
+
+.filter__select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #1f1f1f;
+  color: #fff;
+  border: 1px solid #444;
+  outline: none;
+}
+
+/* Galeri (şu anda boş) */
+.library__gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Load More Butonu */
+.btn {
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn--load-more {
+  background-color: #333;
+  color: #fff;
+}
+
+.btn--load-more:hover {
+  background-color: #555;
+}
+
+/* Boş kütüphane durumu */
+.library__empty-state {
+  margin-top: 40px;
+}
+
+.empty-state__message p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Kataloga git butonu */
+.btn--catalog {
+  background: linear-gradient(to right, #ffa500, #ff6600);
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+}
+
+.btn__link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
