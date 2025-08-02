@@ -54,6 +54,8 @@ body {
   color: #fff;
   border: 1px solid #444;
   outline: none;
+  display: flex;
+  justify-content: flex-start;
 }
 
 /* Galeri (şu anda boş) */
@@ -110,4 +112,93 @@ body {
   text-decoration: none;
   color: #fff;
   font-weight: 600;
+}
+.library__gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Kartlar arası boşluk */
+  padding: 0;
+  margin-top: 30px;
+  list-style: none;
+  max-width: 1200px; /* Genişlik sınırı */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.library__gallery li {
+  flex: 1 1 calc((100% / 3) - 20px); /* 3 kart, aralıklı genişlik */
+  max-width: 395px;
+  height: 574px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.library__gallery li:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.library__gallery img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.library__gallery .info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  height: calc(100% - 380px);
+}
+
+.library__gallery .title {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.library__gallery .meta {
+  font-size: 14px;
+  color: #f87719;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.library__gallery .desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Responsive düzenlemeler */
+@media screen and (max-width: 991px) {
+  .library__gallery li {
+    flex: 1 1 calc((100% / 2) - 20px); /* 2’li sıra */
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .library__gallery li {
+    flex: 1 1 100%; /* Tek sütun */
+    max-width: none;
+  }
 }
