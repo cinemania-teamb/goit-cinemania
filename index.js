@@ -1,4 +1,4 @@
-import"./assets/header-XPaL0Jmi.js";import{m as w}from"./assets/main-BuXyi7k6.js";import{a as h}from"./assets/vendor-DOPN71bB.js";const p="31537460e1a179eb456191c366c87865",g="https://api.themoviedb.org/3",L="https://image.tmdb.org/t/p/",b=document.getElementById("weekly-trends"),E=`<svg class="icon" id="stars-empty"width="18" height="18">
+import"./assets/header-XPaL0Jmi.js";import{m as w}from"./assets/modal-B6ENpYm-.js";import{a as h}from"./assets/vendor-DOPN71bB.js";const p="31537460e1a179eb456191c366c87865",g="https://api.themoviedb.org/3",L="https://image.tmdb.org/t/p/",b=document.getElementById("weekly-trends"),E=`<svg class="icon" id="stars-empty"width="18" height="18">
           <use href="./icons.svg#icon-star-outline"></use>
         </svg>`,$=`<svg class="icon" id="stars-half" fill="#F87719" width="18" height="18">
         <defs>
