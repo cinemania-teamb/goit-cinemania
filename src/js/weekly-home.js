@@ -10,10 +10,16 @@ const IMG_BASE_URL = "https://image.tmdb.org/t/p/";
 // DOM elements
 const weeklyTrendsContainer = document.getElementById('weekly-trends');
 // Yıldız ikonları
-const startEmpty = `<svg class="icon" width="18" height="18">
+const startEmpty = `<svg class="icon" id="stars-empty"width="18" height="18">
           <use href="./icons.svg#icon-star-outline"></use>
         </svg>`;
-const startHalf = `<svg class="icon" fill="#F87719" width="18" height="18">
+const startHalf = `<svg class="icon" id="stars-half" fill="#F87719" width="18" height="18">
+        <defs>
+        <clipPath id="half-clip">
+          <rect x="0" y="0" width="12" height="24"/>
+        </clipPath>
+      </defs>
+      <use href="#icon-star-half"/>
           <use href="./icons.svg#icon-star-half"></use>
         </svg>`;
 const startFull = `<svg class="icon" fill="#F87719" width="18" height="18">
@@ -111,3 +117,17 @@ movieList.addEventListener('click', async e => {
     }
   }   
 });
+// Otomatik kaydırma efekti için
+let currentSlide = 0;
+const slides = document.querySelectorAll('.movie-card');
+const slider = document.querySelector('.weekly-trends');
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  slider.scrollTo({
+    left: slides[currentSlide].offsetLeft,
+    behavior: 'smooth'
+  });
+}
+// 5 saniyede bir kaydır
+setInterval(nextSlide, 500);
