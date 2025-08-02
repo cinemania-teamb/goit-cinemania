@@ -1,10 +1,11 @@
-/* hero.css */
+/* ========== GENEL AYARLAR ========== */
 
 body {
   margin: 0;
   overflow-x: hidden;
 }
 
+/* Ana carousel alanı */
 #hero-carousel {
   position: relative;
   width: 100%;
@@ -12,6 +13,7 @@ body {
   overflow: hidden;
 }
 
+/* Carousel kaydırma alanı */
 .carousel-container {
   display: flex;
   height: 100%;
@@ -20,6 +22,7 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Her bir slide */
 .hero-slide {
   flex: 0 0 100%;
   height: 100%;
@@ -30,6 +33,7 @@ body {
   color: white;
 }
 
+/* Slide üstü karartma */
 .hero-overlay {
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
@@ -37,6 +41,7 @@ body {
   z-index: 1;
 }
 
+/* Yazı içeriği */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -44,6 +49,7 @@ body {
   max-width: 600px;
 }
 
+/* Önceki / Sonraki butonları */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -57,31 +63,194 @@ body {
   cursor: pointer;
 }
 
-#prev-btn {
-  left: 10px;
-}
-#next-btn {
-  right: 10px;
-}
+#prev-btn { left: 10px; }
+#next-btn { right: 10px; }
 
+/* Genel buton stilleri */
 button {
   margin-top: 1rem;
   margin-right: 10px;
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 4px;
-  background-color: crimson;
+  background-color: #F87719;
   color: white;
   cursor: pointer;
   font-size: 1rem;
 }
 
 button:hover {
-  background-color: darkred;
+  background-color: #F8F8F8;
+  color: black;
 }
 
-/* Modal aynı kalabilir */
-.modal { /* ... */ }
-.modal-content { /* ... */ }
-.close-btn { /* ... */ }
+/* Modal gizleme sınıfları */
 .hidden { display: none; }
+.modal.hidden { display: none !important; }
+
+/* ========== MODAL STİLLERİ ========== */
+
+/* Modal arkaplan */
+.custom-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Modal içerik kutusu */
+.custom-modal .modal-content {
+  background-color: #1c1c1c;
+  color: white;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  position: relative;
+  padding: 2rem;
+}
+
+/* Kapat butonu */
+.custom-modal .close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  z-index: 110;
+}
+
+/* Modal altyapı ve efekt */
+.basicLightbox {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.3s ease;
+}
+
+/* Modal iç kart görünümü */
+.basicLightbox__placeholder > * {
+  box-shadow: 0 0 40px 10px rgba(255, 136, 25, 0.6);
+  border: 1px solid rgba(255, 136, 25, 0.8);
+  background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 15px;
+}
+
+/* Buton hover efekti */
+.movie-submit:hover {
+  background-color: #ffa726 !important;
+  color: #222 !important;
+  box-shadow: 0 0 15px #ffa726;
+  transition: all 0.3s ease;
+}
+
+/* Modal kart içeriği */
+.custom-herocard {
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  box-shadow: 0 0 40px 10px rgba(255, 136, 25, 0.6);
+  border: 1px solid rgba(255, 136, 25, 0.8);
+}
+
+/* Poster görseli */
+.custom-herocard img {
+  width: 250px;
+  border-radius: 10px;
+}
+
+/* İçerik metni */
+.custom-herocard .modal-info {
+  margin-top: 1rem;
+}
+
+/* Başlık biçimi */
+.basicLightbox h3 {
+  font-size: 1.5rem;
+  color: #F87719;
+  position: relative;
+  margin-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.basicLightbox h3::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 2px;
+  background-color: #F87719;
+  margin-top: 0.4rem;
+}
+
+/* Tablo başlıklarına ":" işareti ekle */
+.basicLightbox th::after {
+  content: ":";
+  margin-left: 4px;
+  color: #FFA726;
+}
+
+/* ========== RESPONSIVE STİLLER ========== */
+
+/* Tablet (768px altı) */
+@media (max-width: 768px) {
+  .custom-herocard {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .custom-herocard img {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .hero-content {
+    padding: 2rem;
+  }
+}
+
+/* Mobil (480px altı) */
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 1.2rem;
+  }
+
+  .custom-herocard {
+    padding: 1rem 0.5rem;
+    border-radius: 8px;
+  }
+
+  .custom-herocard img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .basicLightbox h3 {
+    font-size: 1.2rem;
+  }
+}
