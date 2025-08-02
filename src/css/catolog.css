@@ -83,6 +83,13 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    transition: transform 0.3s ease;
+}
+.list li:hover {
+    transform: translateY(-10px);
+    border-color: rgba(248,119,25,1);
+    box-shadow: 0 0 20px rgba(248,119,25,1);
+    cursor: pointer;
 }
 
 .list li .info {
@@ -91,9 +98,11 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     border-radius: 5px;
+    mask-image: linear-gradient(to top, black 80%, transparent 100%);
+    backdrop-filter: blur(2px) brightness(0.9);
 }
 
 .not-found {

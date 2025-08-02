@@ -96,7 +96,6 @@ export const  renderFilms =(images)=> {
   list.innerHTML = '';
   const newImages = images
     .map(({ id, title, image, year, rating, genreId }) => {
-      console.log(genreId);
       const date = year.split('-')[0];
       const newRating = renderRating(rating);
       return image
