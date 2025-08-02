@@ -117,17 +117,3 @@ movieList.addEventListener('click', async e => {
     }
   }   
 });
-// Otomatik kaydırma efekti için
-let currentSlide = 0;
-const slides = document.querySelectorAll('.movie-card');
-const slider = document.querySelector('.weekly-trends');
-
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  slider.scrollTo({
-    left: slides[currentSlide].offsetLeft,
-    behavior: 'smooth'
-  });
-}
-// 5 saniyede bir kaydır
-setInterval(nextSlide, 500);
