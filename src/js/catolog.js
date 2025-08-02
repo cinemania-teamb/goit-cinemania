@@ -8,7 +8,7 @@ const list = document.querySelector('.list');
 const pagination = document.querySelector('.pagination ul');
 let lastSearch = { input: '', year: '', isSearch: false };
 
-const startEmpty = `<svg class="icon" width="18" height="18">
+const startEmpty = `<svg class="icon" id="stars-empty" width="18" height="18">
           <use href="./icons.svg#icon-star-outline"></use>
         </svg>`;
 const startHalf = `<svg class="icon" fill="#F87719" width="18" height="18">
