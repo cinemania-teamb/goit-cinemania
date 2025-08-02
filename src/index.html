@@ -3,24 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cinemania</title>
-    <link rel="stylesheet" href="/css/header.css" />
+
+    <link rel="stylesheet" href="./css/weekly-home.css" />
+     <link rel="stylesheet" href="./css/scroll.css" />
+     <link rel="stylesheet" href="./css/modal.css">
+     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/hero.css" />
   </head>
   <body>
-    <load src="./partials/header.html" />
-    <load src="./hero.html" />
+    <button id="scrollToTopBtn" title="Yukarı Çık">↑</button>
 
+ 
+    <load src="./partials/header.html"/>
+    <load src="./hero.html" />
     <main>
       <!-- Loads the specified .html file -->
+      <load src="./partials/weekly-home.html"/>
+    
     </main>
-
-    <load href="./catolog.html">catolog</load>
-
     <load src="./partials/footer.html" />
-
+    <script type="module" src="./main.js"></script>
     <script type="module" src="./js/header.js"></script>
+    <script type="module" src="./js/weekly-home.js"></script>
+    <script type="module" src="./js/scroll.js"></script>
     <script type="module" src="./js/hero.js"></script>
+
   </body>
-</html>
+
+  
+</html>  
