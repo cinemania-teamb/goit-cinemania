@@ -95,7 +95,8 @@ export const fetchSearchFilms = async (input, year = null,page) => {
 export const  renderFilms =(images)=> {
   list.innerHTML = '';
   const newImages = images
-    .map(({ id, title, image, year, rating }) => {
+    .map(({ id, title, image, year, rating, genreId }) => {
+      console.log(genreId);
       const date = year.split('-')[0];
       const newRating = renderRating(rating);
       return image
@@ -104,7 +105,7 @@ export const  renderFilms =(images)=> {
       width: 395px;
       height: 574px;">
           <div class="info">
-              <p>${title.toUpperCase()} | ${date}</p>
+              <p>${title.toUpperCase()} <span style="color:#B7B7B7">${genreId} | ${date}</span></p>
               ${newRating}
           </div>
       </li>`
