@@ -113,6 +113,13 @@ body {
   color: #fff;
   font-weight: 600;
 }
+
+.load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
 .library__gallery {
   display: flex;
   flex-wrap: wrap;
