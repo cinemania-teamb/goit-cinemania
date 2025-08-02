@@ -1,4 +1,4 @@
-import{m as T}from"./assets/modal-CJYPKaIi.js";import{a as u}from"./assets/vendor-DOPN71bB.js";const m="4e64f2e0a197aa7c5d1170773553320c",y=document.querySelector(".list"),$=document.querySelector(".pagination ul");let v={input:"",year:"",isSearch:!1};const o=`<svg class="icon" width="18" height="18">
+import"./assets/header-BYFhdvTp.js";/* empty css                     */import{m as T}from"./assets/modal-B6ENpYm-.js";import{a as u}from"./assets/vendor-DOPN71bB.js";const m="4e64f2e0a197aa7c5d1170773553320c",y=document.querySelector(".list"),$=document.querySelector(".pagination ul");let v={input:"",year:"",isSearch:!1};const o=`<svg class="icon" width="18" height="18">
           <use href="./icons.svg#icon-star-outline"></use>
         </svg>`,d=`<svg class="icon" fill="#F87719" width="18" height="18">
           <use href="./icons.svg#icon-star-half"></use>
