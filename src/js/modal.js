@@ -7,7 +7,7 @@ const modalUi = movie => {
             <p class="close">&#10006;</p>
               <img src="https://image.tmdb.org/t/p/w500/${
                 movie.poster_path
-              }" width="375" height="478" alt="${movie.title}">
+              }" alt="${movie.title}">
               <div>
                 <h2>${movie.title.toUpperCase()}</h2>
                 <table>
@@ -32,7 +32,7 @@ const modalUi = movie => {
                     </tbody>
                 </table>
               <h3>ABOUT</h3>
-              <p>${movie.overview}</p>
+              <p class="modal-info">${movie.overview}</p>
               <button class="movie-submit" type="submit">Add to my library</button>
               </div>
             </form>

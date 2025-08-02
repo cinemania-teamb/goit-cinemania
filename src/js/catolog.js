@@ -21,19 +21,39 @@ const startFull = `<svg class="icon" fill="#F87719" width="18" height="18">
 let currentPage = 1;
 let totalPages = 1;
 
+const genreIdsToStrings = async (genreIds) => {
+    const options = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMWRkMzEzNDEyYzUzMjQyYTU2Nzc5ZjVjMWIwNWJlNSIsIm5iZiI6MTc1MzY5OTE4OS4xOTcsInN1YiI6IjY4ODc1Mzc1MGU0ODE4YTk5OTUyYjQ0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.H565ZjOCGF6NhGwiaRj-BAZ12tadYHWeWDarSsxXtc4'
+        }
+    };
+    try{
+        const res = await axios.request(options);
+        const genreIdList = res.data.genres;
+        const genreString =genreIds.map( ids => genreIdList.find(genreItem => ids === genreItem.id)?.name || "undefined").join(" ");
+        return genreString;
+    }
+    catch{
+        return false;
+    }
+}
+
 export const fetchWeeklyFilms = async (page = 1) => {
     const url=`https://api.themoviedb.org/3/trending/movie/week?api_key=${api_key}&language=en-US&page=${page}`;
     
     try{
       const res = await axios.get(url);
-        const filteredData = res.data.results.map( filter=> ({
+        const filteredData = await Promise.all( res.data.results.map(async filter=> ({
             title: filter.title || filter.name,
             rating: Math.round(filter.vote_average),
-            genreId: filter.genre_ids,
+            genreId:await genreIdsToStrings(filter.genre_ids),
             year: filter.release_date || filter.first_air_date,
             id: filter.id,
             image: filter.poster_path
-        }));
+        })));
         return {
             filteredData,
             total_pages: res.data.total_pages
@@ -75,7 +95,8 @@ export const fetchSearchFilms = async (input, year = null,page) => {
 export const  renderFilms =(images)=> {
   list.innerHTML = '';
   const newImages = images
-    .map(({ id, title, image, year, rating }) => {
+    .map(({ id, title, image, year, rating, genreId }) => {
+      console.log(genreId);
       const date = year.split('-')[0];
       const newRating = renderRating(rating);
       return image
@@ -84,7 +105,7 @@ export const  renderFilms =(images)=> {
       width: 395px;
       height: 574px;">
           <div class="info">
-              <p>${title.toUpperCase()} | ${date}</p>
+              <p>${title.toUpperCase()} <span style="color:#B7B7B7">${genreId} | ${date}</span></p>
               ${newRating}
           </div>
       </li>`
@@ -194,3 +215,5 @@ export const renderRating = (rating) => {
   }
   return `<div>${starts}</div>`;
 }
+
+

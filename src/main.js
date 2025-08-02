@@ -1,10 +1,7 @@
+import './js/header.js';
 import axios from 'axios';
 import modalUi from './js/modal.js';
 import {
-  fetchWeeklyFilms,
-  fetchSearchFilms,
-  renderFilms,
-  renderPagination,
   loadWeeklyFilms,
   loadSearchFilms,
 } from './js/catolog.js';
