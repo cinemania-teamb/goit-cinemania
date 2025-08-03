@@ -3,7 +3,13 @@ import eventBus from './eventBus.js';
 
 const filmList = document.querySelector('.library__gallery');
 const emptyState = document.getElementById('empty-state');
+const filterSelect = document.querySelector('.filter__select');
+const loadMoreBtn = document.querySelector('.btn--load-more');
 const tabs = document.querySelectorAll('.tab');
+
+const FILMS_PER_PAGE = 6;
+let currentPage = 1;
+let filteredFilms = [];
 
 const startEmpty = `<svg class="icon" width="18" height="18">
   <use href="./icons.svg#icon-star-outline"></use>
@@ -64,20 +70,12 @@ function renderRating(rating) {
   return `<div class="rating-stars">${stars}</div>`;
 }
 
-function renderFilms() {
-  const films = getLocalStorageFilms();
-  filmList.innerHTML = '';
+function renderFilmsPage() {
+  const startIndex = (currentPage - 1) * FILMS_PER_PAGE;
+  const endIndex = startIndex + FILMS_PER_PAGE;
+  const filmsToShow = filteredFilms.slice(startIndex, endIndex);
 
-  if (films.length === 0) {
-    filmList.style.display = 'none';
-    emptyState.style.display = 'block';
-    return;
-  }
-
-  filmList.style.display = 'flex';
-  emptyState.style.display = 'none';
-
-  films.forEach(film => {
+  filmsToShow.forEach(film => {
     const card = document.createElement('li');
     card.className = 'film-card';
     card.style.cursor = 'pointer';
@@ -107,19 +105,67 @@ function renderFilms() {
 
     filmList.appendChild(card);
   });
+
+  if (endIndex >= filteredFilms.length) {
+    loadMoreBtn.style.display = 'none';
+  } else {
+    loadMoreBtn.style.display = 'block';
+  }
 }
+
+function applyFilter() {
+  const selectedGenre = filterSelect.value;
+  const allFilms = getLocalStorageFilms();
+
+  if (selectedGenre === '') {
+    filteredFilms = allFilms;
+  } else {
+    filteredFilms = allFilms.filter(film => {
+      if (typeof film.genres === 'string') {
+        return film.genres.toLowerCase().includes(selectedGenre.toLowerCase());
+      }
+      return false;
+    });
+  }
+
+  currentPage = 1;
+  filmList.innerHTML = '';
+
+  if (filteredFilms.length === 0) {
+    filmList.style.display = 'none';
+    emptyState.style.display = 'block';
+    loadMoreBtn.style.display = 'none';
+  } else {
+    filmList.style.display = 'flex';
+    emptyState.style.display = 'none';
+    renderFilmsPage();
+  }
+}
+
+filterSelect.addEventListener('change', applyFilter);
+
+loadMoreBtn.addEventListener('click', () => {
+  currentPage++;
+  renderFilmsPage();
+});
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     tabs.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-    renderFilms();
+    applyFilter();
   });
 });
 
-renderFilms();
+function initLibrary() {
+  filteredFilms = getLocalStorageFilms();
+  currentPage = 1;
+  applyFilter();
+}
 
 eventBus.addEventListener('libraryUpdated', () => {
   console.log('libraryUpdated event received — rendering films again');
-  renderFilms();
+  initLibrary();
 });
+
+initLibrary();
