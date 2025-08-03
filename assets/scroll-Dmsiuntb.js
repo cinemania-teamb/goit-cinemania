@@ -72,4 +72,4 @@ import{a as u,b as k}from"./vendor-DOPN71bB.js";(function(){const t=document.cre
               </div>
               
             `);c.show(),document.querySelector(".close").addEventListener("click",()=>{c.close()}),document.addEventListener("keyup",function($){$.code==="Escape"&&c.close()})}}catch(i){console.log(i)}})}}catch(e){console.log(e)}};U();document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("scrollToTopBtn");window.addEventListener("scroll",()=>{window.pageYOffset>300?e.classList.add("visible"):e.classList.remove("visible")}),e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})})});export{W as a,J as l,N as m};
-//# sourceMappingURL=scroll-Cqw1Okol.js.map
+//# sourceMappingURL=scroll-Dmsiuntb.js.map
