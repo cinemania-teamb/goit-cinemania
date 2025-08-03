@@ -16,13 +16,14 @@ let startIndex = 0;
 const endIndex = 9;
 
 
-const renderLibrary = () => {
+
+function renderLibrary(){
   const films = getLocalStorageFilms();
   if (films.length === 0) {
     list.innerHTML = `<li class="empty-library">OOPS... We are very sorry! You don’t have any movies at your library..</li>`;
     return;
   }
-  if (films.length < 9) {
+  if (films.length <= 9) {
     loadMore.style.display = 'none';
     renderFilmsLibrary(films);
   } else {
@@ -49,6 +50,7 @@ const renderLibrary = () => {
   
   
 };
+
 
 const  renderFilmsLibrary =(images)=> {
   const newImages = images

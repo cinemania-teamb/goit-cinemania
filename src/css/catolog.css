@@ -165,6 +165,45 @@ body{
   stroke: #F87719; /* Sadece kenar çizgisi */
   stroke-width: 1.5px;
 }
+
+body .input-form,
+body #choose {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+/* Select'in görünümünü özelleştir (ok simgesini kendimiz çizelim) */
+body #choose {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 40px;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="16" viewBox="0 0 24 24" width="16" xmlns="http: //www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
+}
+body #choose option {
+    background-color: #000000;
+    color: #ffffff;
+}
+/* Açık tema (body.dark-theme sınıfı eklenince aktifleşir) */
+body.dark-theme .input-form,
+body.dark-theme #choose {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+}
+body.dark-theme #choose {
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23000000" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+}
+body.dark-theme #choose option {
+    background-color: #ffffff;
+    color: #000000;
+}
+
 @media screen and (min-width: 768px) {
     .container{
         max-width: 768px;

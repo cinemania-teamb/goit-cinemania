@@ -58,3 +58,25 @@
   color: black;
   border: none;
 }
+body .filter__select {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+}
+
+body .filter__select option {
+  background-color: #000000;
+  color: #000000;
+}
+
+/* Koyu tema */
+body.dark-theme .filter__select {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #444;
+}
+
+body.dark-theme .filter__select option {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
