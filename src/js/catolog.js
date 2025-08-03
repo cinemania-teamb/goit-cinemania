@@ -21,7 +21,7 @@ const startFull = `<svg class="icon" fill="#F87719" width="18" height="18">
 let currentPage = 1;
 let totalPages = 1;
 
-const genreIdsToStrings = async (genreIds) => {
+export const genreIdsToStrings = async (genreIds) => {
     const options = {
         method: 'GET',
         url: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
