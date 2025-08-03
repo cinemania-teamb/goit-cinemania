@@ -21,7 +21,7 @@ body {
 }
 
 .hero-section h1 {
-  font-size: clamp(24px, 5vw, 34px);
+  font-size: 64px;
   color: white;
   margin: 20px 0;
   word-wrap: break-word;
