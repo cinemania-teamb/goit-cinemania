@@ -173,3 +173,9 @@ body{
     font-size: 14px;
   }
 }
+@media screen and (min-width:1280px) {
+  .position-container{
+    width: 1280px;
+    margin: -36px 482px 115px 0;
+  }
+}
