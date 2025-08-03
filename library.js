@@ -1,4 +1,4 @@
-import"./assets/scroll-Or_cMxbN.js";/* empty css                       */import{b as _}from"./assets/vendor-DogxyxdA.js";const m=new EventTarget,C=e=>{typeof e.genres=="string"&&(e.genres=e.genres.split(",").map(n=>({name:n.trim()})));const s=_.create(`
+import"./assets/loader-C9lNPeof.js";/* empty css                       */import{b as _}from"./assets/vendor-DogxyxdA.js";const m=new EventTarget,C=e=>{typeof e.genres=="string"&&(e.genres=e.genres.split(",").map(n=>({name:n.trim()})));const s=_.create(`
     <form id="movie-form">
       <p class="close" style="cursor:pointer;">&#10006;</p>
       <img src="https://image.tmdb.org/t/p/w500/${e.poster_path}" alt="${e.title}" width="375" height="478" />
