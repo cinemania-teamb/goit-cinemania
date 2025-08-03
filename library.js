@@ -1,4 +1,4 @@
-import"./assets/hero-BNAtimJG.js";/* empty css                       */import{b}from"./assets/vendor-DOPN71bB.js";const g=new EventTarget,$=e=>{typeof e.genres=="string"&&(e.genres=e.genres.split(",").map(a=>({name:a.trim()})));const r=b.create(`
+import"./assets/hero-BNAtimJG.js";/* empty css                       */import{b as w}from"./assets/vendor-DOPN71bB.js";const y=new EventTarget,C=e=>{typeof e.genres=="string"&&(e.genres=e.genres.split(",").map(n=>({name:n.trim()})));const r=w.create(`
     <form id="movie-form">
       <p class="close" style="cursor:pointer;">&#10006;</p>
       <img src="https://image.tmdb.org/t/p/w500/${e.poster_path}" alt="${e.title}" width="375" height="478" />
@@ -18,7 +18,7 @@ import"./assets/hero-BNAtimJG.js";/* empty css                       */import{b}
             </tr>
             <tr>
               <th>Genre</th>
-              <td>${e.genres.map(a=>a.name).join(", ")}</td>
+              <td>${e.genres.map(n=>n.name).join(", ")}</td>
             </tr>
           </tbody>
         </table>
@@ -27,20 +27,20 @@ import"./assets/hero-BNAtimJG.js";/* empty css                       */import{b}
         <button class="movie-submit" type="submit">Add to my library</button>
       </div>
     </form>
-  `);r.show(),document.querySelector(".close").addEventListener("click",()=>{r.close()});const t=a=>{a.key==="Escape"&&(r.close(),document.removeEventListener("keyup",t))};document.addEventListener("keyup",t);const l=document.getElementById("movie-form"),o=document.querySelector(".movie-submit");let i=u();i.some(a=>a.id===e.id)?o.textContent="Remove from my library":o.textContent="Add to my library",l.addEventListener("submit",a=>{if(a.preventDefault(),i=u(),o.textContent==="Remove from my library"){const p=i.filter(h=>String(h.id)!==String(e.id));localStorage.setItem("movies",JSON.stringify(p)),g.dispatchEvent(new CustomEvent("libraryUpdated")),r.close();return}i.push({id:e.id,title:e.title,poster_path:e.poster_path,overview:e.overview,vote_average:e.vote_average,vote_count:e.vote_count,popularity:e.popularity,genres:e.genres.map(p=>p.name).join(",")}),localStorage.setItem("movies",JSON.stringify(i)),o.textContent="Remove from my library",g.dispatchEvent(new CustomEvent("libraryUpdated"))})};function u(){return JSON.parse(localStorage.getItem("movies"))||[]}const d=document.querySelector(".library__gallery"),m=document.getElementById("empty-state"),y=document.querySelectorAll(".tab"),s=`<svg class="icon" width="18" height="18">
+  `);r.show(),document.querySelector(".close").addEventListener("click",()=>{r.close()});const t=n=>{n.key==="Escape"&&(r.close(),document.removeEventListener("keyup",t))};document.addEventListener("keyup",t);const s=document.getElementById("movie-form"),a=document.querySelector(".movie-submit");let c=h();c.some(n=>n.id===e.id)?a.textContent="Remove from my library":a.textContent="Add to my library",s.addEventListener("submit",n=>{if(n.preventDefault(),c=h(),a.textContent==="Remove from my library"){const v=c.filter(_=>String(_.id)!==String(e.id));localStorage.setItem("movies",JSON.stringify(v)),y.dispatchEvent(new CustomEvent("libraryUpdated")),r.close();return}c.push({id:e.id,title:e.title,poster_path:e.poster_path,overview:e.overview,vote_average:e.vote_average,vote_count:e.vote_count,popularity:e.popularity,genres:e.genres.map(v=>v.name).join(",")}),localStorage.setItem("movies",JSON.stringify(c)),a.textContent="Remove from my library",y.dispatchEvent(new CustomEvent("libraryUpdated"))})};function h(){return JSON.parse(localStorage.getItem("movies"))||[]}const p=document.querySelector(".library__gallery"),b=document.getElementById("empty-state"),E=document.querySelector(".filter__select"),g=document.querySelector(".btn--load-more"),$=document.querySelectorAll(".tab"),f=6;let u=1,l=[];const o=`<svg class="icon" width="18" height="18">
   <use href="./icons.svg#icon-star-outline"></use>
-</svg>`,c=`<svg class="icon" fill="#F87719" width="18" height="18">
+</svg>`,d=`<svg class="icon" fill="#F87719" width="18" height="18">
   <use href="./icons.svg#icon-star-half"></use>
-</svg>`,n=`<svg class="icon" fill="#F87719" width="18" height="18">
+</svg>`,i=`<svg class="icon" fill="#F87719" width="18" height="18">
   <use href="./icons.svg#icon-star"></use>
-</svg>`;function f(){return JSON.parse(localStorage.getItem("movies"))||[]}function E(e){const r=Math.round(e);let t="";switch(r){case 0:t=`${s.repeat(5)}`;break;case 1:t=`${c}${s.repeat(4)}`;break;case 2:t=`${n}${s.repeat(4)}`;break;case 3:t=`${n}${c}${s.repeat(3)}`;break;case 4:t=`${n.repeat(2)}${s.repeat(3)}`;break;case 5:t=`${n.repeat(2)}${c}${s.repeat(2)}`;break;case 6:t=`${n.repeat(3)}${s.repeat(2)}`;break;case 7:t=`${n.repeat(3)}${c}${s}`;break;case 8:t=`${n.repeat(4)}${s}`;break;case 9:t=`${n.repeat(4)}${c}`;break;case 10:t=`${n.repeat(5)}`;break;default:t=`${s.repeat(5)}`}return`<div class="rating-stars">${t}</div>`}function v(){const e=f();if(d.innerHTML="",e.length===0){d.style.display="none",m.style.display="block";return}d.style.display="flex",m.style.display="none",e.forEach(r=>{const t=document.createElement("li");t.className="film-card",t.style.cursor="pointer",t.setAttribute("data-id",r.id);const l=E(r.vote_average);t.innerHTML=`
-      <img src="https://image.tmdb.org/t/p/w500/${r.poster_path}" alt="${r.title} poster" />
+</svg>`;function S(){return JSON.parse(localStorage.getItem("movies"))||[]}function F(e){const r=Math.round(e);let t="";switch(r){case 0:t=`${o.repeat(5)}`;break;case 1:t=`${d}${o.repeat(4)}`;break;case 2:t=`${i}${o.repeat(4)}`;break;case 3:t=`${i}${d}${o.repeat(3)}`;break;case 4:t=`${i.repeat(2)}${o.repeat(3)}`;break;case 5:t=`${i.repeat(2)}${d}${o.repeat(2)}`;break;case 6:t=`${i.repeat(3)}${o.repeat(2)}`;break;case 7:t=`${i.repeat(3)}${d}${o}`;break;case 8:t=`${i.repeat(4)}${o}`;break;case 9:t=`${i.repeat(4)}${d}`;break;case 10:t=`${i.repeat(5)}`;break;default:t=`${o.repeat(5)}`}return`<div class="rating-stars">${t}</div>`}function L(){const e=(u-1)*f,r=e+f;l.slice(e,r).forEach(s=>{const a=document.createElement("li");a.className="film-card",a.style.cursor="pointer",a.setAttribute("data-id",s.id);const c=F(s.vote_average);a.innerHTML=`
+      <img src="https://image.tmdb.org/t/p/w500/${s.poster_path}" alt="${s.title} poster" />
       <div class="info">
-        <div class="title">${r.title}</div>
-        <div class="meta">${r.genres}</div>
-        <div class="desc">${r.overview}</div>
-        <div class="meta">IMDB: ${r.vote_average} (${r.vote_count} oy)</div>
-        ${l}
+        <div class="title">${s.title}</div>
+        <div class="meta">${s.genres}</div>
+        <div class="desc">${s.overview}</div>
+        <div class="meta">IMDB: ${s.vote_average} (${s.vote_count} oy)</div>
+        ${c}
       </div>
-    `,t.addEventListener("click",()=>{typeof r.genres=="string"&&(r.genres=r.genres.split(",").map(o=>({name:o.trim()}))),$(r)}),d.appendChild(t)})}y.forEach(e=>{e.addEventListener("click",()=>{y.forEach(r=>r.classList.remove("active")),e.classList.add("active"),v()})});v();g.addEventListener("libraryUpdated",()=>{console.log("libraryUpdated event received — rendering films again"),v()});
+    `,a.addEventListener("click",()=>{typeof s.genres=="string"&&(s.genres=s.genres.split(",").map(n=>({name:n.trim()}))),C(s)}),p.appendChild(a)}),r>=l.length?g.style.display="none":g.style.display="block"}function m(){const e=E.value,r=S();e===""?l=r:l=r.filter(t=>typeof t.genres=="string"?t.genres.toLowerCase().includes(e.toLowerCase()):!1),u=1,p.innerHTML="",l.length===0?(p.style.display="none",b.style.display="block",g.style.display="none"):(p.style.display="flex",b.style.display="none",L())}E.addEventListener("change",m);g.addEventListener("click",()=>{u++,L()});$.forEach(e=>{e.addEventListener("click",()=>{$.forEach(r=>r.classList.remove("active")),e.classList.add("active"),m()})});function k(){l=S(),u=1,m()}y.addEventListener("libraryUpdated",()=>{console.log("libraryUpdated event received — rendering films again"),k()});k();
 //# sourceMappingURL=library.js.map
