@@ -173,7 +173,9 @@ body {
     min-height: 431px;
     padding: 20px 0;
   }
-
+  .hero-section h1{
+    font-size: 32px;
+  }
   .position-container {
     width: 100%;
     height: auto;
@@ -208,7 +210,9 @@ body {
     height: auto;
     min-height: 432px;
   }
-
+  .hero-section h1{
+    font-size: 44px;
+  }
   .position-container {
     width: 80%;
     height: auto;
