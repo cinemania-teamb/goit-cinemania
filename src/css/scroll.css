@@ -20,3 +20,30 @@
     #scrollToTopBtn.visible {
       opacity: 1;
     }
+   /*Scrolbar Özelleştirme*/
+    /* Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #F87719, #FF4500);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #FF4500, #F87719);
+}
+::-webkit-scrollbar-button {
+  display: none; /* Ok butonlarını gizle */
+  width: 0;
+  height: 0;
+}
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #F87719 #111;
+}
