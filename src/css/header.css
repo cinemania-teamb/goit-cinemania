@@ -1,8 +1,9 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 :root {
     --font-family-regular: 'Roboto Regular', sans-serif;
     --font-family-medium: 'Roboto Medium', sans-serif;
@@ -13,9 +14,7 @@
     --background: #000000;
 }
 
-
-
-.header-container{
+.header-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -255,6 +254,12 @@
     }
 }
 
+body {
+    background-color: #000000;
+    color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* Tema: Light (varsayılan) - koyu temayı devre dışı bırak */
 body.dark-theme {
     background-color: #ffffff;
@@ -292,4 +297,12 @@ body.dark-theme .mobile-menu .nav-item a {
 body.dark-theme .mobile-menu .nav-item a:hover,
 body.dark-theme .mobile-menu .nav-item a:focus {
     color: var(--focus-color);
+}
+
+main,
+section,
+.library-container,
+.hero {
+    background-color: inherit;
+    color: inherit;
 }
