@@ -96,7 +96,6 @@ export const  renderFilms =(images)=> {
   list.innerHTML = '';
   const newImages = images
     .map(({ id, title, image, year, rating, genreId }) => {
-      console.log(genreId);
       const date = year.split('-')[0];
       const newRating = renderRating(rating);
       return image
@@ -164,7 +163,8 @@ export const loadSearchFilms = async (input, year, page = 1)=> {
     if (filteredFilms.length === 0) {
       list.innerHTML = `<li class="not-found">OOPS... We are very sorry! We don’t have any results matching your search.</li>`;
       pagination.innerHTML = '';
-      return;
+      lastSearch = { input: '', year: '', isSearch: false };
+      return lastSearch;
     }
     renderFilms(filteredFilms);
     renderPagination(totalPages, currentPage);
