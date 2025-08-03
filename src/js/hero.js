@@ -33,7 +33,7 @@ const loadTrendingMovies = async () => {
       heroList.innerHTML = `
       <div class="container position-container">
         <h1>${randomMovie.title}</h1>
-        <div>
+        <div class= rating-svg>
           ${renderRating(Math.round(randomMovie.vote_average))}
         </div>
         <p>${randomMovie.overview}</p>
