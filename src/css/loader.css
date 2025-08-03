@@ -1,0 +1,60 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  margin: 0;
+  background-color: var(--background);
+  transition: opacity 400ms ease-in-out, visibility 0s 400ms;
+}
+
+.show-loader {
+  visibility: visible;
+  opacity: 1;
+}
+
+.wave {
+  display: flex;
+  gap: 6px;
+}
+
+.wave-bar {
+  width: 4px;
+  height: 40px;
+  background-color: rgba(248, 119, 25, 1);
+  border-radius: 2px;
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(1) {
+  animation-delay: -1.2s;
+}
+.wave-bar:nth-child(2) {
+  animation-delay: -1.1s;
+}
+.wave-bar:nth-child(3) {
+  animation-delay: -1s;
+}
+.wave-bar:nth-child(4) {
+  animation-delay: -0.9s;
+}
+.wave-bar:nth-child(5) {
+  animation-delay: -0.8s;
+}
+
+@keyframes wave {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
