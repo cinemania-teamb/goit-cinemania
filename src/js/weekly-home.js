@@ -10,16 +10,10 @@ const IMG_BASE_URL = "https://image.tmdb.org/t/p/";
 // DOM elements
 const weeklyTrendsContainer = document.getElementById('weekly-trends');
 // Yıldız ikonları
-const startEmpty = `<svg class="icon" id="stars-empty"width="18" height="18">
+const startEmpty = `<svg class="icon" id="stars-empty" width="18" height="18">
           <use href="./icons.svg#icon-star-outline"></use>
         </svg>`;
-const startHalf = `<svg class="icon" id="stars-half" fill="#F87719" width="18" height="18">
-        <defs>
-        <clipPath id="half-clip">
-          <rect x="0" y="0" width="12" height="24"/>
-        </clipPath>
-      </defs>
-      <use href="#icon-star-half"/>
+const startHalf = `<svg class="icon" id="stars-half" fill="#F87719"  width="18" height="18">
           <use href="./icons.svg#icon-star-half"></use>
         </svg>`;
 const startFull = `<svg class="icon" fill="#F87719" width="18" height="18">
@@ -99,7 +93,100 @@ function displayWeeklyTrends(movies, genresMap) {
     </div>
     `;
   }).join('');
+  // Slider fonksiyonunu çağır
+  initResponsiveSlider();
 }
+// Responsive slider fonksiyonu
+function initResponsiveSlider() {
+  const slider = weeklyTrendsContainer;
+  const slides = document.querySelectorAll('.movie-card');
+  
+  if (!slides.length) return;
+
+  // Slider CSS class'ını ekle
+  slider.classList.add('responsive-slider');
+  
+  let currentIndex = 0;
+  let slideInterval;
+  const slideCount = slides.length;
+  const slideWidth = slides[0].offsetWidth;
+  const slideMargin = parseInt(window.getComputedStyle(slides[0]).marginRight) || 0;
+  const totalSlideWidth = slideWidth + slideMargin;
+
+  function goToSlide(index) {
+    currentIndex = (index + slideCount) % slideCount; // Döngüsel geçiş
+    slider.scrollTo({
+      left: currentIndex * totalSlideWidth,
+      behavior: 'smooth'
+    });
+  }
+
+  function startAutoSlide() {
+    // Mobilde (<=768px) tek tek, masaüstünde otomatik kaydırma yapma
+    if (window.innerWidth <= 768) {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, 5000); // 5 saniye aralık
+    }
+  }
+
+  // İlk çalıştırmada ve pencere boyutu değiştiğinde kontrol et
+  startAutoSlide();
+  window.addEventListener('resize', startAutoSlide);
+
+  // Dokunmatik destek (mobil için)
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slider.addEventListener('touchstart', (e) => {
+    clearInterval(slideInterval);
+    touchStartX = e.changedTouches[0].screenX;
+  }, {passive: true});
+
+  slider.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    startAutoSlide();
+  }, {passive: true});
+
+  function handleSwipe() {
+    if (touchEndX < touchStartX - 50) goToSlide(currentIndex + 1); // Sola kaydır
+    if (touchEndX > touchStartX + 50) goToSlide(currentIndex - 1); // Sağa kaydır
+  }
+}
+
+// Responsive slider CSS
+const sliderStyles = `
+  <style>
+    /* Mevcut stillerinizi bozmadan sadece slider için ekstra stiller */
+    .weekly-trends.responsive-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .weekly-trends.responsive-slider::-webkit-scrollbar {
+      display: none;
+    }
+    .weekly-trends.responsive-slider .movie-card {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+    }
+    
+    /* Mobil için özel stil (768px ve altı) */
+    @media (max-width: 768px) {
+      .weekly-trends.responsive-slider .movie-card {
+        width: 85%;
+        margin-right: 16px;
+      }
+    }
+  </style>
+`;
+
+// CSS'i document'e ekle
+document.head.insertAdjacentHTML('beforeend', sliderStyles);
 // Sayfa yüklendiğinde trend filmleri getir
 document.addEventListener('DOMContentLoaded', fetchWeeklyTrends);
 

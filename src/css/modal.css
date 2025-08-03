@@ -16,6 +16,7 @@
     border-radius: 10px;
     overflow: auto;
     margin: 0 auto;
+    box-shadow: 0 0 15px 5px rgba(255, 105, 0, 0.6);
 }
 
 #movie-form h2 {
@@ -96,7 +97,17 @@ td {
     background-color: white;
     color: black;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    #movie-form img{
+        max-width: 248px;
+        max-height: 315px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        margin-top: 160px;
+    }
+}
+@media screen and (min-width:769px) and (max-width:1279px)  {
     #movie-form {
         flex-direction: row;
         width: 704px;
@@ -114,7 +125,7 @@ td {
         font-size: 14px;
     }
 }
-@media screen and (min-width:1158px) {
+@media screen and (min-width:1280px) {
     
     #movie-form {
         flex-direction: row;
