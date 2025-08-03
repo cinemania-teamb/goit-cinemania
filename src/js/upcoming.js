@@ -1,5 +1,6 @@
 import debounce from 'lodash.debounce';
 import axios from 'axios';
+import { genreIdsToStrings } from './catolog.js';
 export const API_KEY = '41b8f9437bf3f899281f8a3f9bdc0891';
 
 export const API_BAERER =
@@ -22,17 +23,8 @@ function findFilmAtStorage(key, id) {
   return savedFilms?.find(film => film.id === Number(id)) || null;
 }
 
-// weekly-trends-genres'dan alınacak fonksiyon
-function validateGenres(genre_ids, genres_list) {
-  // Bu fonksiyonun tam içeriği sağlanmadığı için, örnek bir dönüş değeri varsayılmıştır.
-  // Gerçek uygulamanızda bu fonksiyonu doğru bir şekilde doldurmanız gerekir.
-  if (!genres_list) return 'Genre information not available';
-  const genreNames = genre_ids.map(id => {
-    const genre = genres_list.find(g => g.id === id);
-    return genre ? genre.name : 'Unknown';
-  });
-  return genreNames.join(', ');
-}
+
+
 
 // API servisi
 const upcomingMoviesApi = axios.create({
@@ -46,7 +38,7 @@ async function getUpcomingMovies() {
 }
 
 // İşaretleme oluşturma
-function careateUpcomingMarkup(film) {
+ async function careateUpcomingMarkup(film) {
   const {
     backdrop_path,
     poster_path,
@@ -68,12 +60,9 @@ function careateUpcomingMarkup(film) {
   const transformedDate = release_date.replaceAll('-', '.');
   const roundedPopularity = roundToTen(popularity);
 
-  const genres = validateGenres(
-    genre_ids,
-    JSON.parse(localStorage.getItem('genres'))
-  );
+  const genres = await genreIdsToStrings(genre_ids);
 
-  return `
+  upcomingEl.innerHTML = `
     <div class='upcoming-card__figure'>
       <div class='upcoming-card__layout'></div>
         <img
@@ -160,6 +149,3 @@ async function handleUpcoming() {
   }
 }
 
-function updateUpcoming(markup = '') {
-  upcomingEl.innerHTML = markup;
-}
