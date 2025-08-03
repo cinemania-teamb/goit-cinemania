@@ -78,6 +78,7 @@ const modalUi = movie => {
       vote_count: movie.vote_count,
       popularity: movie.popularity,
       genres: movie.genres.map(genre => genre.name).join(','),
+      year:movie.release_date.split('-')[0]
     };
 
     movies.push(movieData);
