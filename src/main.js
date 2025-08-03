@@ -3,6 +3,7 @@ import axios from 'axios';
 import modalUi from './js/modal.js';
 import { loadWeeklyFilms, loadSearchFilms } from './js/catolog.js';
 
+
 const form = document.getElementById('catolog-form');
 const list = document.querySelector('.list');
 const pagination = document.querySelector('.pagination ul');
