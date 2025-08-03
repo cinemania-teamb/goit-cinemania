@@ -72,4 +72,4 @@ import{a as p,b as _}from"./vendor-DogxyxdA.js";(function(){const t=document.cre
               </div>
               
             `);c.show(),document.querySelector(".close").addEventListener("click",()=>{c.close()}),document.addEventListener("keyup",function($){$.code==="Escape"&&c.close()})}}catch(i){console.log(i)}})}}catch(e){console.log(e)}};U();document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("scrollToTopBtn");window.addEventListener("scroll",()=>{window.pageYOffset>300?e.classList.add("visible"):e.classList.remove("visible")}),e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})})});function q(){document.onreadystatechange=function(){if(document.readyState==="complete"){document.querySelector("body").style.visibility="visible";const e=document.querySelector("#loader");e&&e.classList.remove("show-loader")}else setTimeout(function(){document.querySelector("body").style.visibility="visible";const e=document.querySelector("#loader");e&&e.classList.remove("show-loader")},3e3)}}q();export{W as a,B as g,J as l,N as m};
-//# sourceMappingURL=loader-Dl9jjXay.js.map
+//# sourceMappingURL=loader-CXpOrM4J.js.map
