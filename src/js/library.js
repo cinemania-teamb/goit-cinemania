@@ -156,6 +156,18 @@ tabs.forEach(tab => {
     applyFilter();
   });
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const links = document.querySelectorAll('.nav-link');
+  const currentPath = window.location.pathname.split('/').pop();
+  links.forEach(link => {
+    const href = link.getAttribute('href').split('/').pop();
+    if (href === currentPath) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+});
 
 function initLibrary() {
   filteredFilms = getLocalStorageFilms();

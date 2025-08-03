@@ -1,10 +1,7 @@
 import './js/header.js';
 import axios from 'axios';
 import modalUi from './js/modal.js';
-import {
-  loadWeeklyFilms,
-  loadSearchFilms,
-} from './js/catolog.js';
+import { loadWeeklyFilms, loadSearchFilms } from './js/catolog.js';
 
 const form = document.getElementById('catolog-form');
 const list = document.querySelector('.list');
@@ -12,14 +9,13 @@ const pagination = document.querySelector('.pagination ul');
 
 const api_key = '4e64f2e0a197aa7c5d1170773553320c';
 
-
 let lastSearch = { input: '', year: '', isSearch: false };
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const input = e.target.elements.input.value;
   const year = e.target.elements.choose.value;
-  if (input === "") {
+  if (input === '') {
     list.innerHTML = `<li class="not-found">Please enter a search term.</li>`;
     pagination.innerHTML = '';
     lastSearch = { input: '', year: '', isSearch: false };
@@ -32,11 +28,23 @@ form.addEventListener('submit', async e => {
   form.reset();
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const links = document.querySelectorAll('.nav-link');
+  const currentPath = window.location.pathname.split('/').pop();
+  links.forEach(link => {
+    const href = link.getAttribute('href').split('/').pop();
+    if (href === currentPath) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+});
+
 pagination.addEventListener('click', async e => {
   if (e.target.tagName === 'LI' && e.target.dataset.page) {
     const page = Number(e.target.dataset.page);
     if (lastSearch.isSearch) {
-      
       await loadSearchFilms(lastSearch.input, lastSearch.year, page);
     } else {
       await loadWeeklyFilms(page);
@@ -55,9 +63,9 @@ list.addEventListener('click', async e => {
     } catch (error) {
       console.log(error);
     }
-  }   
-});  
+  }
+});
 
 // Initial load
 loadWeeklyFilms();
-// Weekly kısmı 
+// Weekly kısmı
