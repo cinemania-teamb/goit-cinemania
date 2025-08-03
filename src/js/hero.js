@@ -1,131 +1,124 @@
+import axios from 'axios';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
+import { renderRating } from './catolog.js';
 import modalUi from './modal.js';
-import openHeroCard from './herocard.js';
 
+const api_key = '4e64f2e0a197aa7c5d1170773553320c';
 
-const API_KEY = '4e64f2e0a197aa7c5d1170773553320c';
+const heroList = document.querySelector('.hero-section');
 
-const carousel = document.getElementById('carousel');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-
-const detailsModal = document.getElementById('details-modal');
-const trailerModal = document.getElementById('trailer-modal');
-const detailsContainer = document.getElementById('details-container');
-const trailerContainer = document.getElementById('trailer-container');
-const closeDetails = document.getElementById('close-details');
-const closeTrailer = document.getElementById('close-trailer');
-
-async function loadTrendingMovies() {
+const loadTrendingMovies = async () => {
   try {
-    const res = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`);
-    const data = await res.json();
+    const images = await axios.get(
+      `https://api.themoviedb.org/3/trending/movie/day?api_key=${api_key}`
+    );
+    const { results } = images.data;
 
-    if (!data.results || data.results.length === 0) {
-      showDefaultSlide();
-      return;
-    }
-
-    // Her film için bir slayt oluştur
-    data.results.forEach(film => {
-      const slide = document.createElement('div');
-      slide.className = 'hero-slide';
-      slide.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${film.backdrop_path})`;
-
-
-
-      slide.innerHTML = `
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <h1>${film.title}</h1>
-          <p>${film.overview.slice(0, 200)}...</p>
-          <p>IMDb: ${film.vote_average}</p>
-          <button onclick='openDetailsModal(${JSON.stringify(film).replace(/'/g, "\\'")})'>More Details</button>
-          <button onclick='openTrailerModal(${film.id})'>Watch Trailer</button>
-        </div>
+    if (results.length === 0) {
+      heroList.style.backgroundImage = 'url(../img/noresult.jpg)';
+      heroList.innerHTML = `
+      <div class="container position-container">
+        <h1>Let’s Make Your Own Cinema</h1>
+        <p>Is a guide to creating a personalized movie theater experience. You'll need a projector, screen, and speakers. Decorate your space, choose your films, and stock up on snacks for the full experience.</p>
+        <a href="./catolog.html" class="link-trailer">Get Started</a>
       `;
-
-      
-
-      carousel.appendChild(slide);
-    });
-
-  } catch (err) {
-    console.error('Hata:', err);
-    showDefaultSlide();
-  }
-}
-
-
-
-
-
-
-
-
-function showDefaultSlide() {
-  const slide = document.createElement('div');
-  slide.className = 'hero-slide';
-  slide.style.backgroundImage = `url('default-hero.jpg')`;
-  slide.innerHTML = `
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Welcome to Cinemania</h1>
-      <p>Explore timeless stories and epic moments from world cinema.</p>
-      <button onclick="window.location.href='catalog.html'">Get Started</button>
-    </div>
-  `;
-  carousel.appendChild(slide);
-}
-
-// Butonlarla kaydırma
-prevBtn.addEventListener('click', () => {
-  carousel.scrollBy({ left: -window.innerWidth, behavior: 'smooth' });
-});
-
-nextBtn.addEventListener('click', () => {
-  carousel.scrollBy({ left: window.innerWidth, behavior: 'smooth' });
-});
-
-
-
-// Modallar
-function openDetailsModal(film) {
-  openHeroCard(film.id);
-}
-
-
-
-
-
-async function openTrailerModal(filmId) {
-  try {
-    const res = await fetch(`https://api.themoviedb.org/3/movie/${filmId}/videos?api_key=${API_KEY}&language=en-US`);
-    const data = await res.json();
-
-    const trailer = data.results.find(v => v.type === "Trailer" && v.site === "YouTube");
-
-    if (!trailer) {
-      trailerContainer.innerHTML = `<p>Sorry, no trailer available.</p>`;
     } else {
-      trailerContainer.innerHTML = `
-        <iframe width="100%" height="400" src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
-      `;
+      const random = Math.floor(Math.random() * results.length);
+
+      const randomMovie = results[random];
+
+      heroList.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${randomMovie.backdrop_path})`;
+
+      heroList.innerHTML = `
+      <div class="container position-container">
+        <h1>${randomMovie.title}</h1>
+        <div>
+          ${renderRating(Math.round(randomMovie.vote_average))}
+        </div>
+        <p>${randomMovie.overview}</p>
+        <button data-id=${randomMovie.id} class="trailer">Watch trailer</button>
+        <button data-id=${
+          randomMovie.id
+        } id="details" class="details">More details</button>
+      </div>
+    `;
+      const detailsButton = document.getElementById('details');
+      detailsButton.addEventListener('click', async e => {
+        if (e.target.nodeName === 'BUTTON') {
+          const id = e.target.dataset.id;
+          try {
+            const response = await axios.get(
+              `https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}&language=en-US`
+            );
+            modalUi(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      });
+      const trailerButton = document.querySelector('.trailer');
+      trailerButton.addEventListener('click', async e => {
+        const id = trailerButton.dataset.id;
+        if (e.target.nodeName === 'BUTTON') {
+          try {
+            const response = await axios.get(
+              `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${api_key}&language=en-US`
+            );
+            const videos = response.data.results;
+
+            const trailer = videos.find(
+              video => video.type === 'Trailer' && video.site === 'YouTube'
+            );
+            if (trailer) {
+              const instance = basicLightbox.create(`
+              <div class="modal-trailer" style="width:700px; height: 400px;">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
+                <p class="close">&#10006;</p>
+              </div>
+               
+            `);
+              instance.show();
+
+              const closeButton = document.querySelector('.close');
+              closeButton.addEventListener('click', () => {
+                instance.close();
+              });
+              document.addEventListener('keyup', function (e) {
+                if (e.code === 'Escape') {
+                  instance.close();
+                }
+              });
+            } else {
+              const instance = basicLightbox.create(`
+              <div class="no-trailer">
+                
+                <p>OOPS... We are very sorry! But we couldn’t find the trailer.</p>
+                <img src="../img/sorry.jpg" width="363" height="318" alt="Sorry image">
+                <p class="close">&#10006;</p>
+              </div>
+              
+            `);
+              instance.show();
+              const closeButton = document.querySelector('.close');
+              closeButton.addEventListener('click', () => {
+                instance.close();
+              });
+              document.addEventListener('keyup', function (e) {
+                if (e.code === 'Escape') {
+                  instance.close();
+                }
+              });
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      });
     }
-
-    trailerModal.classList.remove('hidden');
-  } catch (err) {
-    trailerContainer.innerHTML = `<p>Error loading trailer.</p>`;
-    trailerModal.classList.remove('hidden');
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
-// Modal kapama
-closeDetails.onclick = () => detailsModal.classList.add('hidden');
-closeTrailer.onclick = () => trailerModal.classList.add('hidden');
-
-// Sayfa yüklenince başla
-document.addEventListener('DOMContentLoaded', loadTrendingMovies);
-
-window.openDetailsModal = openDetailsModal;
-window.openTrailerModal= openTrailerModal;
-
+loadTrendingMovies();
