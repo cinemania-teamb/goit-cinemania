@@ -6,7 +6,7 @@ export const API_KEY = '41b8f9437bf3f899281f8a3f9bdc0891';
 export const API_BAERER =
   'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmODU0Y2RkODdhYTkwNTNjYTAwMjI5ZmVhNzNlNTkyNSIsInN1YiI6IjYxODZmYWFkZmU2MzE4MDA2NDgzZTdkZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vm-UaTyMPJ2HhXiSRvz-VpPqqqKEF-3PBdhfYlg5v3g';
 
-export const STORAGE_KEY = 'myLibraryFilms';
+export const STORAGE_KEY = 'movies';
 
 
 // Yardımcı fonksiyonlar
@@ -54,7 +54,6 @@ async function getUpcomingMovies() {
 
   const isSaved = findFilmAtStorage(STORAGE_KEY, id);
   const btnAttribute = isSaved ? 'remove' : 'add';
-  const btnText = isSaved ? 'Remove from my library' : 'Add to my library';
   
   const imgPath = window.screen.width < 768 ? poster_path : backdrop_path;
   const transformedDate = release_date.replaceAll('-', '.');
@@ -101,8 +100,34 @@ async function getUpcomingMovies() {
       </div>
       <h4 class="upcoming-card__subtitle metrics-text">ABOUT</h4>
         <p class="upcoming-card__text">${overview}</p>
-      <button class="btn" type="button" data-id=${id} data-${btnAttribute}>${btnText}</button>
+      <button class="btn" type="button" data-id=${id} data-${btnAttribute}>Add to my library</button>
     </div>`;
+   const libraryBtn = document.querySelector('.btn');
+   libraryBtn.addEventListener('click', () => { 
+    const isSaved = findFilmAtStorage(STORAGE_KEY, id);
+    if (isSaved) {
+      libraryBtn.textContent = 'Add to my library';
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(
+          JSON.parse(localStorage.getItem(STORAGE_KEY)).filter(film => film.id !== id)
+        )
+      );
+    } else {
+      libraryBtn.textContent = 'Remove from my library';
+      const newFilm = {
+        id,
+        title,
+        poster_path,
+        year: release_date.split('-')[0],
+        genres,
+        vote_average,
+      };
+      const savedFilms = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      savedFilms.push(newFilm);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(savedFilms));
+    }
+   })
 }
 
 // Resim işleme
@@ -125,7 +150,6 @@ function handleUpcomingImg({ poster_path, backdrop_path, title }) {
 // Ana işlev
 const upcomingEl = document.querySelector('.upcoming-card');
 
-window.addEventListener('DOMContentLoaded', handleUpcoming);
 
 async function handleUpcoming() {
   try {
@@ -133,8 +157,6 @@ async function handleUpcoming() {
     const randomMovie = getRandomItem(upcomingMovies);
     
     const markup = careateUpcomingMarkup(randomMovie);
-    
-    updateUpcoming(markup);
 
     const debouncedImgHandler = debounce(
       () => handleUpcomingImg(randomMovie),
@@ -149,3 +171,4 @@ async function handleUpcoming() {
   }
 }
 
+handleUpcoming();

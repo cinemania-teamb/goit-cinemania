@@ -1,189 +1,60 @@
-/* Temel ayarlar */
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #0a0a0a;
-  color: #ffffff;
-}
-
-/* Kütüphane bölüm */
-.library {
-  background-color: #0a0a0a;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-/* Tür seçimi */
-.library__filter {
-  margin-bottom: 30px;
-}
-
-.filter__select {
-  padding: 10px 15px;
-  border-radius: 8px;
-  font-size: 16px;
-  background-color: #1f1f1f;
-  color: #fff;
-  border: 1px solid #444;
-  outline: none;
-  display: flex;
-  justify-content: flex-start;
-}
-
-/* Galeri (şu anda boş) */
-.library__gallery {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-/* Load More Butonu */
-.btn {
-  font-size: 16px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn--load-more {
-  background-color: #333;
-  color: #fff;
-}
-
-.btn--load-more:hover {
-  background-color: #555;
-}
-
-/* Boş kütüphane durumu */
-.library__empty-state {
-  margin-top: 40px;
-}
-
-.empty-state__message p {
-  font-size: 20px;
-  line-height: 1.6;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-/* Kataloga git butonu */
-.btn--catalog {
-  background: linear-gradient(to right, #ffa500, #ff6600);
-  padding: 12px 24px;
-  border-radius: 25px;
-  border: none;
-}
-
-.btn__link {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-}
-
-.load-more-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.library__gallery li:hover {
-  transform: translateY(-10px);
-  border-color: rgba(248, 119, 25, 1);
-  box-shadow: 0 0 20px rgba(248, 119, 25, 0.8);
-}
-
-.library__gallery {
+.library-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px; /* Kartlar arası boşluk */
-  padding: 0;
+  align-items: center;
+  gap: 20px;
   margin-top: 30px;
   list-style: none;
-  max-width: 1200px; /* Genişlik sınırı */
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.library__gallery li {
-  flex: 1 1 calc((100% / 3) - 20px); /* 3 kart, aralıklı genişlik */
-  max-width: 395px;
-  height: 574px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.library__gallery li:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-}
-
-.library__gallery img {
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-  display: block;
-}
-
-.library__gallery .info {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
-  height: calc(100% - 380px);
-}
-
-.library__gallery .title {
+.library-list li p {
   color: white;
+  font-size: 20px;
+  margin-top: 10px;
   font-weight: bold;
-  font-size: 18px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  width: 50%;
 }
 
-.library__gallery .meta {
-  font-size: 14px;
-  color: #f87719;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.library-list li h3 {
+  color: white;
+  font-size: 20px;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
-.library__gallery .desc {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.library-list li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform 0.3s ease;
 }
 
-/* Responsive düzenlemeler */
-@media screen and (max-width: 991px) {
-  .library__gallery li {
-    flex: 1 1 calc((100% / 2) - 20px); /* 2’li sıra */
-    max-width: none;
-  }
+.library-list li:hover {
+  transform: translateY(-10px);
+  border-color: rgba(248, 119, 25, 1);
+  box-shadow: 0 0 20px rgba(248, 119, 25, 1);
+  cursor: pointer;
 }
 
-@media screen and (max-width: 600px) {
-  .library__gallery li {
-    flex: 1 1 100%; /* Tek sütun */
-    max-width: none;
-  }
+.library-list li .info {
+  padding: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  border-radius: 5px;
+  mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  backdrop-filter: blur(2px) brightness(0.9);
+}
+.load-more{
+  display: none;
+  margin: 20px auto;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background-color: #FA691D;
+  color: black;
+  border: none;
 }
