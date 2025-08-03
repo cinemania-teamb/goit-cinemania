@@ -70,6 +70,86 @@ function renderRating(rating) {
   return `<div class="rating-stars">${stars}</div>`;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Tema kontrolü
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+  }
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const themeSwitcher = document.getElementById('theme-switcher');
+
+  if (!menuToggle || !mobileMenu || !mobileOverlay || !themeSwitcher) {
+    console.error('Gerekli elementler bulunamadı:', {
+      menuToggle,
+      mobileMenu,
+      mobileOverlay,
+      themeSwitcher,
+    });
+    return;
+  }
+
+  const toggleMenu = () => {
+    mobileMenu.classList.toggle('open');
+    mobileOverlay.classList.toggle('active');
+    document.body.classList.toggle('no-scroll');
+    const isExpanded = mobileMenu.classList.contains('open');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+  };
+
+  menuToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  mobileOverlay.addEventListener('click', toggleMenu);
+
+  themeSwitcher.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    localStorage.setItem(
+      'theme',
+      document.body.classList.contains('dark-theme') ? 'dark' : 'light'
+    );
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      toggleMenu();
+    }
+  });
+
+  // Aktif link ayarlama
+
+  // Geçerli sayfanın dosya adını al (boşsa index.html say)
+  let currentPath = window.location.pathname.split('/').pop().toLowerCase();
+  if (!currentPath) currentPath = 'index.html';
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    let linkPath = link.getAttribute('href').split('/').pop().toLowerCase();
+    if (!linkPath) linkPath = 'index.html';
+
+    // Uzantı olmadan veya farklı küçük harf/uzantı sorunları için eşitleme
+    if (
+      currentPath === linkPath ||
+      currentPath.replace('.html', '') === linkPath.replace('.html', '')
+    ) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+
+    // Mobil menüde linke tıklanınca menüyü kapat
+    link.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('open')) {
+        toggleMenu();
+      }
+    });
+  });
+});
+
 function renderFilmsPage() {
   const startIndex = (currentPage - 1) * FILMS_PER_PAGE;
   const endIndex = startIndex + FILMS_PER_PAGE;
