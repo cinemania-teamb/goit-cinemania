@@ -64,7 +64,9 @@ document.getElementById("category").onchange = function (e) {
 function renderLibrary() {
   const films = getLocalStorageFilms();
   if (films.length === 0) {
-    list.innerHTML = `<li class="empty-library">OOPS... We are very sorry! You don’t have any movies at your library..</li>`;
+    list.innerHTML = `<li class="empty-library">OOPS... We are very sorry! You don’t have any movies at your library.. <a href="./catolog.html" class="started">Get Started</a></li>
+      
+    `;
     return;
   }
   if (films.length <= 9) {

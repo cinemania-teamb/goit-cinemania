@@ -39,3 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+let currentPath = window.location.pathname;
+currentPath = currentPath.endsWith('/')
+  ? 'index.html'
+  : currentPath.split('/').pop();
+document.querySelectorAll('.nav-link').forEach(link => {
+  const linkPath = link.getAttribute('href');
+  if (linkPath === currentPath) {
+    link.classList.add('active');
+  } else {
+    link.classList.remove('active');
+  }
+});

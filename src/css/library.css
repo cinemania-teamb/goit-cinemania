@@ -85,3 +85,13 @@ body.dark-theme .filter__select option {
   padding: 12px 60px 12px 20px;
   border-radius: 8px;
 }
+.empty-library .started{
+  display: inline-block;
+  text-decoration: none;
+  margin: 20px auto;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background-color: #FA691D;
+  color: black;
+  border: none;
+}

@@ -303,3 +303,18 @@ section,
   background-color: inherit;
   color: inherit;
 }
+.nav-link.active {
+  color: var(--focus-color) !important;
+}
+
+.nav-link.active::after {
+  background-color: var(--focus-color) !important;
+}
+
+body.dark-theme .nav-link.active {
+  color: var(--focus-color) !important;
+}
+
+body.dark-theme .nav-link.active::after {
+  background-color: var(--focus-color) !important;
+}
