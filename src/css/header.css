@@ -103,6 +103,9 @@
 .nav-link.active::after {
   background: var(--focus-color);
 }
+.nav-link.active {
+  color: var(--focus-color) !important;
+}
 
 .header-theme-switcher {
   display: flex;
