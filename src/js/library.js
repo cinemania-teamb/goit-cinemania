@@ -1,8 +1,7 @@
 import axios from 'axios';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import { renderRating } from "./catolog.js";
-
+import { renderRating } from './catolog.js';
 
 const list = document.querySelector('.library-list');
 const loadMore = document.querySelector('.load-more');
@@ -15,9 +14,7 @@ function getLocalStorageFilms() {
 let startIndex = 0;
 const endIndex = 9;
 
-
-
-function renderLibrary(){
+function renderLibrary() {
   const films = getLocalStorageFilms();
   if (films.length === 0) {
     list.innerHTML = `<li class="empty-library">OOPS... We are very sorry! You don’t have any movies at your library..</li>`;
@@ -30,29 +27,40 @@ function renderLibrary(){
     const initialFilms = films.slice(startIndex, endIndex);
     renderFilmsLibrary(initialFilms);
     loadMore.style.display = 'block';
-    loadMore.addEventListener('click', () => { 
-
+    loadMore.addEventListener('click', () => {
       startIndex += 9;
       const nextFilms = films.slice(startIndex, startIndex + endIndex);
-      
+
       if (nextFilms.length === 0) {
         loadMore.style.display = 'none';
         return;
       }
-      
+
       renderFilmsLibrary(nextFilms);
-      
+
       if (startIndex + endIndex >= films.length) {
         loadMore.style.display = 'none';
       }
-    })
+    });
   }
-  
-  
-};
+}
 
+document.addEventListener('DOMContentLoaded', () => {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav-link');
 
-const  renderFilmsLibrary =(images)=> {
+  navLinks.forEach(link => {
+    const linkHref = link.getAttribute('href').split('/').pop();
+
+    if (currentPage === linkHref) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+});
+
+const renderFilmsLibrary = images => {
   const newImages = images
     .map(({ id, title, poster_path, year, vote_average, genres }) => {
       const date = year.split('-')[0];
@@ -72,10 +80,10 @@ const  renderFilmsLibrary =(images)=> {
     })
     .join('');
   list.insertAdjacentHTML('beforeend', newImages);
-}
-list.addEventListener('click', async (e) => { 
-  if(e.target.nodeName === 'LI') {
-     const id = e.target.id;
+};
+list.addEventListener('click', async e => {
+  if (e.target.nodeName === 'LI') {
+    const id = e.target.id;
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}&language=en-US`
@@ -87,9 +95,7 @@ list.addEventListener('click', async (e) => {
   }
 });
 
-
 renderLibrary();
-
 
 const modalUi = movie => {
   const instance = basicLightbox.create(`
@@ -104,7 +110,11 @@ const modalUi = movie => {
                     <thead>
                         <tr>
                             <th>Vote/Votes</th>
-                            <td><span class="vote">${Math.round(movie.vote_average)}</span> / <span class="vote">${movie.vote_count}</span></td>
+                            <td><span class="vote">${Math.round(
+                              movie.vote_average
+                            )}</span> / <span class="vote">${
+    movie.vote_count
+  }</span></td>
                         </tr>
                         
                     </thead>
@@ -139,21 +149,20 @@ const modalUi = movie => {
   });
   const movieForm = document.getElementById('movie-form');
 
-  
-
   movieForm.addEventListener('submit', e => {
     e.preventDefault();
-    
+
     const movies = getLocalStorageFilms();
     const updatedMovies = movies.filter(movieItem => movieItem.id !== movie.id);
     localStorage.setItem('movies', JSON.stringify(updatedMovies));
 
-    const newMovies = updatedMovies.map(({ id, title, poster_path, year, vote_average, genres }) => { 
-      const date = year.split('-')[0];
-      const newRating = renderRating(Math.floor(vote_average));
-      return (
-        poster_path &&
-        `<li id="${id}" style="background-image: url(https://image.tmdb.org/t/p/w500/${poster_path});background-size: cover;
+    const newMovies = updatedMovies
+      .map(({ id, title, poster_path, year, vote_average, genres }) => {
+        const date = year.split('-')[0];
+        const newRating = renderRating(Math.floor(vote_average));
+        return (
+          poster_path &&
+          `<li id="${id}" style="background-image: url(https://image.tmdb.org/t/p/w500/${poster_path});background-size: cover;
       background-position: center;
       width: 395px;
       height: 574px;">
@@ -162,14 +171,11 @@ const modalUi = movie => {
               ${newRating}
           </div>
       </li>`
-      );
-    }).join('');
+        );
+      })
+      .join('');
 
     list.innerHTML = newMovies;
     instance.close();
-    
-    
   });
 };
-
-
