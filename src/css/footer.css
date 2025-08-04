@@ -1,12 +1,13 @@
 .footer {
-  margin-bottom: 28px;
+  margin-top: 30px;
 }
 
 .footer-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 8px;
+  margin-left: 35%;
+  margin-top: 50px;
 }
 
 .footer-text {
@@ -64,6 +65,7 @@
   padding: 25px 15px;
   border-radius: 10px;
   box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+  background-color: black;
 }
 .modal-btn{   /* kapatma tuşu*/
   display: flex;
@@ -136,6 +138,8 @@
   padding: 5px;
   text-align: center;
   margin-bottom: 3px;
+  background-color: grey;
+  margin-top: -9px;
 }
 
 .team-member {
@@ -189,6 +193,12 @@
         padding-left: 32px;
         padding-right: 32px;
   }
+  .footer-container {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 2%;
+  }
 }
 @media screen and (min-width: 769px) and (max-width:1279px) {
   .footer {
@@ -198,6 +208,7 @@
   .footer-container {
     display: block;
     text-align: center;
+    margin-left: 2%;
   }
 
   .footer-text {
@@ -220,6 +231,11 @@
 @media screen and (min-width: 1280px) {
   .footer {
     margin-bottom: 80px;
+  }
+  .footer-container {
+    display: block;
+    text-align: center;
+    margin-left: 2%;
   }
   .modal-window {
     top: 50%;
