@@ -1,4 +1,3 @@
-import debounce from 'lodash.debounce';
 import axios from 'axios';
 import { genreIdsToStrings } from './catolog.js';
 export const API_KEY = '41b8f9437bf3f899281f8a3f9bdc0891';
@@ -8,6 +7,7 @@ export const API_BAERER =
 
 export const STORAGE_KEY = 'movies';
 
+const upcomingEl = document.querySelector('.upcoming-card');
 
 // Yardımcı fonksiyonlar
 function getRandomItem(array) {
@@ -18,9 +18,8 @@ function roundToTen(number) {
   return Math.floor(number * 10) / 10;
 }
 
-function findFilmAtStorage(key, id) {
-  const savedFilms = JSON.parse(localStorage.getItem(key));
-  return savedFilms?.find(film => film.id === Number(id)) || null;
+function getLocalStorage(){
+  return JSON.parse(localStorage.getItem("movies")) || [];
 }
 
 
@@ -52,8 +51,6 @@ async function getUpcomingMovies() {
     id,
   } = film;
 
-  const isSaved = findFilmAtStorage(STORAGE_KEY, id);
-  const btnAttribute = isSaved ? 'remove' : 'add';
   
   const imgPath = window.screen.width < 768 ? poster_path : backdrop_path;
   const transformedDate = release_date.replaceAll('-', '.');
@@ -100,21 +97,29 @@ async function getUpcomingMovies() {
       </div>
       <h4 class="upcoming-card__subtitle metrics-text">ABOUT</h4>
         <p class="upcoming-card__text">${overview}</p>
-      <button class="btn" type="button" data-id=${id} data-${btnAttribute}>Add to my library</button>
+      <button class="btn" type="button" data-id=${id}>Add to my library</button>
     </div>`;
    const libraryBtn = document.querySelector('.btn');
-   libraryBtn.addEventListener('click', () => { 
-    const isSaved = findFilmAtStorage(STORAGE_KEY, id);
-    if (isSaved) {
-      libraryBtn.textContent = 'Add to my library';
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(
-          JSON.parse(localStorage.getItem(STORAGE_KEY)).filter(film => film.id !== id)
-        )
-      );
-    } else {
-      libraryBtn.textContent = 'Remove from my library';
+   const new_id = libraryBtn.dataset.id
+   let movies = getLocalStorage();
+
+   if (movies.some(m => m.id === new_id)) {
+     libraryBtn.textContent = 'Remove from my library';
+   } else {
+     libraryBtn.textContent = 'Add to my library';
+   }
+   libraryBtn.addEventListener('click', (e) => { 
+     const id = e.target.dataset.id
+     movies = getLocalStorage();
+
+     if (libraryBtn.textContent === 'Remove from my library') {
+       const movies = getLocalStorage();
+       const updatedMovies = movies.filter(m => m.id !== id);
+       localStorage.setItem('movies', JSON.stringify(updatedMovies));
+       libraryBtn.textContent = 'Add to my library';
+       return;
+     }
+    
       const newFilm = {
         id,
         title,
@@ -125,30 +130,31 @@ async function getUpcomingMovies() {
       };
       const savedFilms = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
       savedFilms.push(newFilm);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(savedFilms));
+     localStorage.setItem(STORAGE_KEY, JSON.stringify(savedFilms));
+     libraryBtn.textContent = 'Remove from my library';
     }
-   })
+   )
 }
 
 // Resim işleme
-function handleUpcomingImg({ poster_path, backdrop_path, title }) {
-  const img = document.querySelector('.upcoming-card__img');
-  if (!img) return console.log('no upcoming section');
+// function handleUpcomingImg({ poster_path, backdrop_path, title }) {
+//   const img = document.querySelector('.upcoming-card__img');
+//   if (!img) return console.log('no upcoming section');
 
-  const posterLink = `https://image.tmdb.org/t/p/original${poster_path}`;
-  const backdropLink = `https://image.tmdb.org/t/p/original${backdrop_path}`;
+//   const posterLink = `https://image.tmdb.org/t/p/original${poster_path}`;
+//   const backdropLink = `https://image.tmdb.org/t/p/original${backdrop_path}`;
 
-  if (window.screen.width < 768 && img.src !== posterLink) {
-    return (img.src = posterLink);
-  }
+//   if (window.screen.width < 768 && img.src !== posterLink) {
+//     return (img.src = posterLink);
+//   }
 
-  if (window.screen.width >= 768 && img.src !== backdropLink) {
-    return (img.src = backdropLink);
-  }
-}
+//   if (window.screen.width >= 768 && img.src !== backdropLink) {
+//     return (img.src = backdropLink);
+//   }
+// }
 
 // Ana işlev
-const upcomingEl = document.querySelector('.upcoming-card');
+
 
 
 async function handleUpcoming() {
@@ -158,12 +164,6 @@ async function handleUpcoming() {
     
     const markup = careateUpcomingMarkup(randomMovie);
 
-    const debouncedImgHandler = debounce(
-      () => handleUpcomingImg(randomMovie),
-      200
-    );
-
-    window.addEventListener('resize', debouncedImgHandler);
     
   } catch (error) {
     console.error('error:', error);
