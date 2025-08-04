@@ -1,183 +1,208 @@
-.body{
- margin: 0;
- overflow-x: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.weekly-sec{
+
+.body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.weekly-sec {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
-.movie-container{
-  margin:80px 32px 60px 32px;
-  padding: 0 15px;}
- /* Section Header */  
- .weekly-header {
+
+.movie-container {
+  margin: 80px 32px 60px 32px;
+  padding: 0 15px;
+}
+
+/* Section Header */
+.weekly-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 28px;
-} 
+}
+
 .weekly-title {
   font-size: 28px;
   font-weight: 500;
-  font-family: "Roboto", sans-serif;
-  line-height: 100%;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0%;
+  letter-spacing: normal;
   width: 215px;
 }
+
 .see-all {
   font-size: 28px;
   font-weight: 500;
-  font-family: "Roboto", sans-serif;
-  line-height: 100%;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1;
   text-transform: uppercase;
-  color: rgba(248,119,25,1);
-  letter-spacing: 0%;
+  color: rgba(248, 119, 25, 1);
+  letter-spacing: normal;
   width: 110px;
   height: 33px;
   text-decoration: none;
   display: flex;
   align-items: center;
 }
-/*Movie Card*/
+
+/* Movie Card */
 .movie-grid {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
 }
+
 .movie-card {
-  position: relative;/* İçindeki absolute pozisyonlu elemanlar için gerekli */
+  position: relative;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   cursor: pointer;
   width: 100%;
   height: 100%;
 }
+
 .movie-card:hover {
   transform: translateY(-10px);
-  border-color: rgba(248,119,25,1);
-  box-shadow: 0 0 20px rgba(248,119,25,1);
+  border-color: rgba(248, 119, 25, 1);
+  box-shadow: 0 0 20px rgba(248, 119, 25, 1);
 }
+
 .movie-poster {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .movie-info {
-  max-width: 100%;
-  max-height: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
-  right: 0; /* Sağ ve sol kenarlara yapışık */
-  width: 100%; /* Üst elemanın genişliğini alır */
-  box-sizing: border-box; /* Padding ve border'ı genişliğe dahil eder */
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
   font-size: 20px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 1;
   text-transform: uppercase;
   padding: 10px;
   display: flex;
   gap: 20px;
   justify-content: space-between;
   align-items: center;
-   /* Gölgeli cam efekti */
-  mask-image: linear-gradient(to top, black 80%, transparent 100%); /*Üst kısımda gradient */
-  background: rgba(0, 0, 0, 0.6); /* Yarı şeffaf siyah */
-  backdrop-filter: blur(2px) brightness(0.9); /* Bulanıklık ve koyuluk */
-  /* Geçiş efekti */
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px) brightness(0.9);
+  mask-image: linear-gradient(to top, black 80%, transparent 100%);
   transition: all 0.3s ease;
+}
 
+.title-date {
+  margin: 20px 0 20px 20px;
 }
-.title-date{
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
+
 .movie-title {
-  color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 1);
   margin-bottom: 5px;
   margin-left: -10px;
 }
+
 .movie-date {
   color: gray;
   margin-top: 5px;
   margin-left: -10px;
 }
+
 .movie-rating {
   display: flex;
   align-items: center;
   margin-top: 8px;
 }
+
 .movie-rating .icon {
   margin-right: 2px;
 }
-/*stars*/
+
+/* Stars */
 #stars-empty {
-  fill: transparent !important; /* İçi tam şeffaf */
-  stroke: #F87719; /* Sadece kenar çizgisi */
+  fill: transparent !important;
+  stroke: #f87719;
   stroke-width: 1.5px;
 }
-/*Movie-Scroll*/
-.scroll-btn{
-    display: none;
+
+/* Movie Scroll */
+.scroll-btn {
+  display: none;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .movie-container {
+    max-width: 767px;
   }
 
-/* Media */
-@media screen and (min-width: 320px) and (max-width: 768px) {
-  .movie-container{
-    max-width: 767px;
-    
-  }
-  .movie-grid{
-    display: flex;
-    overflow-x: auto; /* Yatay kaydırma çubuğu */
-    scroll-snap-type: x mandatory; /* Kaydırmayı belli noktalara kilitle */
+  .movie-grid {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 15px;
-    padding-bottom: 15px; /* Kaydırma çubuğu için boşluk */
+    padding-bottom: 15px;
   }
-   .movie-card {
-    flex: 0 0 100%; /* Kart genişliği (ekranın %100'ü) */
-    scroll-snap-align: start; /* Kaydırma hizalaması */
+
+  .movie-card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
     margin-right: 15px;
   }
+
   .movie-info {
-     font-size: 12px;
-     line-height: 20px;
+    font-size: 12px;
+    line-height: 1.2;
   }
-  .movie-rating .icon{
+
+  .movie-rating .icon {
     width: 14px;
     height: 14px;
   }
-  .weekly-header{
-     font-size: 16px;
-  }
-  .weekly-title{
+
+  .weekly-header {
     font-size: 16px;
   }
-  .see-all{
+
+  .weekly-title {
+    font-size: 16px;
+  }
+
+  .see-all {
     font-size: 16px;
     margin-right: -45px;
   }
 }
-@media screen and (min-width:769px) and (max-width:1279px) {
-   .movie-container{
+
+@media screen and (min-width: 769px) and (max-width: 1279px) {
+  .movie-container {
     max-width: 1279px;
-    
   }
+
   .movie-info {
-     font-size: 12px;
-     line-height: 18px;
+    font-size: 12px;
+    line-height: 1.2;
   }
-   .movie-rating .icon{
+
+  .movie-rating .icon {
     width: 10px;
     height: 10px;
   }
-  .weekly-header{
+
+  .weekly-header {
     font-size: 24px;
   }
 }
