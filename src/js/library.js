@@ -4,7 +4,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import { renderRating } from './catolog.js';
 
 const list = document.querySelector('.library-list');
-const loadMore = document.querySelector('.load-more');
+let loadMore = document.querySelector('.load-more');
 
 const api_key = '4e64f2e0a197aa7c5d1170773553320c';
 
@@ -13,6 +13,53 @@ function getLocalStorageFilms() {
 }
 let startIndex = 0;
 const endIndex = 9;
+
+document.getElementById("category").onchange = function (e) {
+  list.innerHTML = ""
+  const films = getLocalStorageFilms()
+
+  const category = e.target.value
+
+  const newFilms = []
+
+  films.forEach(film => {
+    if (film.genres.split(",").includes(category)) {
+      newFilms.push(film)
+    }
+  })
+  if (newFilms.length <= 9) {
+    loadMore.style.display = 'none';
+    renderFilmsLibrary(newFilms);
+  } else {
+    
+    startIndex = 0;
+    const initialFilms = newFilms.slice(startIndex, endIndex);
+    renderFilmsLibrary(initialFilms);
+    
+
+    // Remove previous event listeners to prevent stacking
+    const newLoadMore = loadMore.cloneNode(true);
+    loadMore.parentNode.replaceChild(newLoadMore, loadMore);
+    loadMore = document.querySelector('.load-more');
+    loadMore.style.display = 'block';
+
+    loadMore.addEventListener('click', () => {
+      startIndex += 9;
+      const nextFilms = newFilms.slice(startIndex, startIndex + endIndex);
+
+      if (nextFilms.length === 0) {
+        loadMore.style.display = 'none';
+        return;
+      }
+
+      renderFilmsLibrary(nextFilms);
+
+      if (startIndex + endIndex >= newFilms.length) {
+        loadMore.style.display = 'none';
+      }
+    });
+  }
+}
 
 function renderLibrary() {
   const films = getLocalStorageFilms();
@@ -24,6 +71,8 @@ function renderLibrary() {
     loadMore.style.display = 'none';
     renderFilmsLibrary(films);
   } else {
+    let startIndex = 0;
+    const endIndex = 9;
     const initialFilms = films.slice(startIndex, endIndex);
     renderFilmsLibrary(initialFilms);
     loadMore.style.display = 'block';
@@ -61,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const renderFilmsLibrary = images => {
+  
   const newImages = images
     .map(({ id, title, poster_path, year, vote_average, genres }) => {
       const date = year.split('-')[0];
