@@ -229,12 +229,13 @@ body {
 
 @media screen and (min-width: 1280px) {
   .position-container {
+    position: absolute;
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 15px;
-    margin-top: -480px !important;
-    margin-left: 80px !important;
+    top: 150px !important;
+    left: 150px !important;
   }
 
   .position-container p {
